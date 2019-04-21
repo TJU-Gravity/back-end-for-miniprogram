@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.PostMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Post">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="postID" jdbcType="INTEGER" property="postid" />
+    <result column="posttype" jdbcType="VARCHAR" property="posttype" />
+    <result column="posterID" jdbcType="VARCHAR" property="posterid" />
+    <result column="judgetag" jdbcType="INTEGER" property="judgetag" />
+    <result column="postingTime" jdbcType="DATE" property="postingtime" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="hits" jdbcType="INTEGER" property="hits" />
+    <result column="lastPost" jdbcType="DATE" property="lastpost" />
+    <result column="postBody" jdbcType="LONGVARBINARY" property="postbody" />
+  </resultMap>
+</mapper>
