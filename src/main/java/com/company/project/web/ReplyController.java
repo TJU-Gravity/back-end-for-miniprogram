@@ -5,10 +5,7 @@ import com.company.project.model.Reply;
 import com.company.project.service.ReplyService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,7 +20,7 @@ public class ReplyController {
     private ReplyService replyService;
 
     @PostMapping("/add")
-    public Result add(Reply reply) {
+    public Result add(@RequestBody Reply reply) {
         replyService.save(reply);
         return ResultGenerator.genSuccessResult();
     }

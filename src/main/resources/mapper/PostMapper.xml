@@ -5,14 +5,20 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="postID" jdbcType="INTEGER" property="postid" />
-    <result column="posttype" jdbcType="VARCHAR" property="posttype" />
-    <result column="posterID" jdbcType="VARCHAR" property="posterid" />
-    <result column="judgetag" jdbcType="INTEGER" property="judgetag" />
-    <result column="postingTime" jdbcType="DATE" property="postingtime" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="hits" jdbcType="INTEGER" property="hits" />
-    <result column="lastPost" jdbcType="DATE" property="lastpost" />
-    <result column="postBody" jdbcType="LONGVARBINARY" property="postbody" />
+    <id column="POSTID" jdbcType="NUMERIC" property="postid" />
+    <result column="POSTTYPE" jdbcType="VARCHAR" property="posttype" />
+    <result column="POSTERID" jdbcType="VARCHAR" property="posterid" />
+    <result column="TEAMID" jdbcType="NUMERIC" property="teamid" />
+    <result column="POSTINGTIME" jdbcType="TIMESTAMP" property="postingtime" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="HITS" jdbcType="NUMERIC" property="hits" />
+    <result column="STATE" jdbcType="NUMERIC" property="state" />
+    <result column="LASTPOST" jdbcType="TIMESTAMP" property="lastpost" />
+    <result column="POSTBODY" jdbcType="CLOB" property="postbody" />
   </resultMap>
+  <select id="getList" parameterType="com.company.project.web.model.MyPage" resultType="com.company.project.web.model.PostResult">
+    select postid,posttype,posterid,teamid,postingtime,title,hits,lastpost,postbody,nickname,headshot from guser as u join post as p on (u.username=p.posterid)
+  </select>
+
+
 </mapper>

@@ -6,7 +6,7 @@ public class UserTags {
     @Id
     private String username;
 
-    
+
     private String tag;
 
     /**

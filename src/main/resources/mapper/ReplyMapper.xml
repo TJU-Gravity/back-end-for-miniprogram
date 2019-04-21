@@ -5,10 +5,15 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="replyID" jdbcType="INTEGER" property="replyid" />
-    <result column="postID" jdbcType="INTEGER" property="postid" />
-    <result column="posterID" jdbcType="VARCHAR" property="posterid" />
-    <result column="postingTime" jdbcType="DATE" property="postingtime" />
-    <result column="replyBody" jdbcType="LONGVARBINARY" property="replybody" />
+    <id column="REPLYID" jdbcType="NUMERIC" property="replyid" />
+    <result column="POSTID" jdbcType="NUMERIC" property="postid" />
+    <result column="POSTERID" jdbcType="VARCHAR" property="posterid" />
+    <result column="POSTINGTIME" jdbcType="TIMESTAMP" property="postingtime" />
+    <result column="REPLYBODY" jdbcType="CLOB" property="replybody" />
   </resultMap>
+
+  <select id="getReplys" parameterType="BigDecimal" resultType="com.company.project.web.model.ReplyResult">
+    select replyid,postid,posterid,postingtime,replybody,nickname,headshot from  reply  as r join  guser as u on (r.posterid=u.username) where postID=#{postid};
+  </select>
+
 </mapper>

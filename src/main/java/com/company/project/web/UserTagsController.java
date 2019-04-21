@@ -3,12 +3,10 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.UserTags;
 import com.company.project.service.UserTagsService;
+import com.company.project.web.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,6 +19,22 @@ import java.util.List;
 public class UserTagsController {
     @Resource
     private UserTagsService userTagsService;
+
+    //NEW！
+    @PostMapping("/ChangeUserTags")
+    public Result changeTags(@RequestBody MyRequestBody userTags) {
+
+        userTagsService.changeTags(userTags.tags,userTags.username);
+        return ResultGenerator.genSuccessResult();
+    }
+
+    //NEW
+    @PostMapping("/findUserByTags")
+    public Result findUser(@RequestBody MyRequestBody userTags) {
+
+        userTagsService.changeTags(userTags.tags,userTags.username);
+        return ResultGenerator.genSuccessResult();
+    }
 
     @PostMapping("/add")
     public Result add(UserTags userTags) {

@@ -13,7 +13,7 @@ public class Post {
     @Column(name = "posterID")
     private String posterid;
 
-    private Integer judgetag;
+    private Integer state;
 
     @Column(name = "postingTime")
     private Date postingtime;
@@ -71,17 +71,17 @@ public class Post {
     }
 
     /**
-     * @return judgetag
+     * @return state
      */
-    public Integer getJudgetag() {
-        return judgetag;
+    public Integer getState() {
+        return state;
     }
 
     /**
-     * @param judgetag
+     * @param state
      */
-    public void setJudgetag(Integer judgetag) {
-        this.judgetag = judgetag;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     /**

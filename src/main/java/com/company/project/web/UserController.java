@@ -3,12 +3,10 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.User;
 import com.company.project.service.UserService;
+import com.company.project.web.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,6 +19,20 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
+
+    //NEW！
+    @PostMapping("/loginWeChat")
+    public Result loginWeChat(@RequestBody User u) {
+        User user = userService.findByUsername(u.getUsername());
+        if (user!=null)
+            return ResultGenerator.genSuccessResult(user);
+        else {
+            userService.addUser(u);
+            return ResultGenerator.genSuccessResult(user);
+        }
+    }
+
+
 
     @PostMapping("/add")
     public Result add(User user) {
@@ -41,8 +53,8 @@ public class UserController {
     }
 
     @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
-        User user = userService.findById(id);
+    public Result detail(@RequestBody MyRequestBody myRequestBody) {
+        User user = userService.findByUsername(myRequestBody.username);
         return ResultGenerator.genSuccessResult(user);
     }
 

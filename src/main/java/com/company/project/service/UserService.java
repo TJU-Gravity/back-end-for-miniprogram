@@ -7,5 +7,7 @@ import com.company.project.model.User;
  * Created by CodeGenerator on 2019/04/21.
  */
 public interface UserService extends Service<User> {
+    User findByUsername(String username);
+    void addUser(User u);
 
 }
