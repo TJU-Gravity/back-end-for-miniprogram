@@ -1,26 +1,27 @@
 package com.company.project.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
 public class Post {
     @Id
     @Column(name = "postID")
-    private Integer postid;
+    private BigDecimal postid;
 
     private String posttype;
 
     @Column(name = "posterID")
     private String posterid;
 
-    private Integer state;
+    private BigDecimal state;
 
     @Column(name = "postingTime")
     private Date postingtime;
 
     private String title;
 
-    private Integer hits;
+    private BigDecimal hits;
 
     @Column(name = "lastPost")
     private Date lastpost;
@@ -31,14 +32,14 @@ public class Post {
     /**
      * @return postID
      */
-    public Integer getPostid() {
+    public BigDecimal getPostid() {
         return postid;
     }
 
     /**
      * @param postid
      */
-    public void setPostid(Integer postid) {
+    public void setPostid(BigDecimal postid) {
         this.postid = postid;
     }
 
@@ -73,14 +74,14 @@ public class Post {
     /**
      * @return state
      */
-    public Integer getState() {
+    public BigDecimal getState() {
         return state;
     }
 
     /**
      * @param state
      */
-    public void setState(Integer state) {
+    public void setState(BigDecimal state) {
         this.state = state;
     }
 
@@ -115,14 +116,14 @@ public class Post {
     /**
      * @return hits
      */
-    public Integer getHits() {
+    public BigDecimal getHits() {
         return hits;
     }
 
     /**
      * @param hits
      */
-    public void setHits(Integer hits) {
+    public void setHits(BigDecimal hits) {
         this.hits = hits;
     }
 

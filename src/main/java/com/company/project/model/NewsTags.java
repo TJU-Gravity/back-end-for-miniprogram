@@ -1,11 +1,12 @@
 package com.company.project.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 public class NewsTags {
     @Id
     @Column(name = "newsID")
-    private Integer newsid;
+    private BigDecimal newsid;
 
 
     private String tag;
@@ -13,14 +14,14 @@ public class NewsTags {
     /**
      * @return newsID
      */
-    public Integer getNewsid() {
+    public BigDecimal getNewsid() {
         return newsid;
     }
 
     /**
      * @param newsid
      */
-    public void setNewsid(Integer newsid) {
+    public void setNewsid(BigDecimal newsid) {
         this.newsid = newsid;
     }
 

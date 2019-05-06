@@ -1,12 +1,15 @@
 package com.company.project.model;
 
+import sun.nio.cs.ext.Big5;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
 public class News {
     @Id
     @Column(name = "newsID")
-    private Integer newsid;
+    private BigDecimal newsid;
 
     private String title;
 
@@ -29,21 +32,21 @@ public class News {
 
     private String poster;
 
-    private Integer hits;
+    private BigDecimal hits;
 
     private byte[] newsbody;
 
     /**
      * @return newsID
      */
-    public Integer getNewsid() {
+    public BigDecimal getNewsid() {
         return newsid;
     }
 
     /**
      * @param newsid
      */
-    public void setNewsid(Integer newsid) {
+    public void setNewsid(BigDecimal newsid) {
         this.newsid = newsid;
     }
 
@@ -162,14 +165,14 @@ public class News {
     /**
      * @return hits
      */
-    public Integer getHits() {
+    public BigDecimal getHits() {
         return hits;
     }
 
     /**
      * @param hits
      */
-    public void setHits(Integer hits) {
+    public void setHits(BigDecimal hits) {
         this.hits = hits;
     }
 

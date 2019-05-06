@@ -1,6 +1,7 @@
 package com.company.project.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "guser")
 public class User {
@@ -23,11 +24,11 @@ public class User {
     private String introduction;
 
     @Column(name = "userPrivileges")
-    private Integer userprivileges;
+    private BigDecimal userprivileges;
 
     private String email;
 
-    private Integer status;
+    private BigDecimal status;
 
     /**
      * @return username
@@ -144,14 +145,14 @@ public class User {
     /**
      * @return userPrivileges
      */
-    public Integer getUserprivileges() {
+    public BigDecimal getUserprivileges() {
         return userprivileges;
     }
 
     /**
      * @param userprivileges
      */
-    public void setUserprivileges(Integer userprivileges) {
+    public void setUserprivileges(BigDecimal userprivileges) {
         this.userprivileges = userprivileges;
     }
 
@@ -172,14 +173,14 @@ public class User {
     /**
      * @return status
      */
-    public Integer getStatus() {
+    public BigDecimal getStatus() {
         return status;
     }
 
     /**
      * @param status
      */
-    public void setStatus(Integer status) {
+    public void setStatus(BigDecimal status) {
         this.status = status;
     }
 }

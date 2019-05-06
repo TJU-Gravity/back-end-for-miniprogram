@@ -1,15 +1,16 @@
 package com.company.project.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
 public class Reply {
     @Id
     @Column(name = "replyID")
-    private Integer replyid;
+    private BigDecimal replyid;
 
     @Column(name = "postID")
-    private Integer postid;
+    private BigDecimal postid;
 
     @Column(name = "posterID")
     private String posterid;
@@ -23,28 +24,28 @@ public class Reply {
     /**
      * @return replyID
      */
-    public Integer getReplyid() {
+    public BigDecimal getReplyid() {
         return replyid;
     }
 
     /**
      * @param replyid
      */
-    public void setReplyid(Integer replyid) {
+    public void setReplyid(BigDecimal replyid) {
         this.replyid = replyid;
     }
 
     /**
      * @return postID
      */
-    public Integer getPostid() {
+    public BigDecimal getPostid() {
         return postid;
     }
 
     /**
      * @param postid
      */
-    public void setPostid(Integer postid) {
+    public void setPostid(BigDecimal postid) {
         this.postid = postid;
     }
 
