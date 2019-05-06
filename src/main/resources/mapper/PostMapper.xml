@@ -8,7 +8,7 @@
     <id column="POSTID" jdbcType="NUMERIC" property="postid" />
     <result column="POSTTYPE" jdbcType="VARCHAR" property="posttype" />
     <result column="POSTERID" jdbcType="VARCHAR" property="posterid" />
-    <result column="TEAMID" jdbcType="NUMERIC" property="teamid" />
+
     <result column="POSTINGTIME" jdbcType="TIMESTAMP" property="postingtime" />
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
     <result column="HITS" jdbcType="NUMERIC" property="hits" />
@@ -17,7 +17,7 @@
     <result column="POSTBODY" jdbcType="CLOB" property="postbody" />
   </resultMap>
   <select id="getList" parameterType="com.company.project.web.model.MyPage" resultType="com.company.project.web.model.PostResult">
-    select postid,posttype,posterid,teamid,postingtime,title,hits,lastpost,postbody,nickname,headshot from guser as u join post as p on (u.username=p.posterid)
+    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,nickname,headshot from guser as u join post as p on (u.username=p.posterid)
   </select>
 
 
