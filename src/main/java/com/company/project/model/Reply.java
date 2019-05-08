@@ -1,7 +1,11 @@
 package com.company.project.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 import javax.persistence.*;
 
 public class Reply {
@@ -15,11 +19,13 @@ public class Reply {
     @Column(name = "posterID")
     private String posterid;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     @Column(name = "postingTime")
-    private Date postingtime;
+    private Timestamp postingtime;
 
     @Column(name = "replyBody")
-    private byte[] replybody;
+    private String replybody;
+
 
     /**
      * @return replyID
@@ -66,28 +72,26 @@ public class Reply {
     /**
      * @return postingTime
      */
-    public Date getPostingtime() {
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    public Timestamp getPostingtime() {
         return postingtime;
     }
 
     /**
      * @param postingtime
      */
-    public void setPostingtime(Date postingtime) {
+    public void setPostingtime(Timestamp postingtime) {
         this.postingtime = postingtime;
     }
 
     /**
      * @return replyBody
      */
-    public byte[] getReplybody() {
+    public String getReplybody() {
         return replybody;
     }
 
-    /**
-     * @param replybody
-     */
-    public void setReplybody(byte[] replybody) {
+    public void setReplybody(String replybody) {
         this.replybody = replybody;
     }
 }

@@ -23,16 +23,15 @@ public class UserTagsController {
     //NEW！
     @PostMapping("/ChangeUserTags")
     public Result changeTags(@RequestBody MyRequestBody userTags) {
-
         userTagsService.changeTags(userTags.tags,userTags.username);
         return ResultGenerator.genSuccessResult();
     }
 
-    //NEW
-    @PostMapping("/findUserByTags")
-    public Result findUser(@RequestBody MyRequestBody userTags) {
+    //NEW 没写完
+    @PostMapping("/findUsersByTags")
+    public Result findUsers(@RequestBody MyRequestBody userTags) {
 
-        userTagsService.changeTags(userTags.tags,userTags.username);
+       //here
         return ResultGenerator.genSuccessResult();
     }
 

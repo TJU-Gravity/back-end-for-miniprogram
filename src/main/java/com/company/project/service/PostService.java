@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface PostService extends Service<Post> {
     public List<PostResult> getList(MyRequestBody myRequestBody);
+    public List<PostResult> getMyList(MyRequestBody myRequestBody);
 
 
 }

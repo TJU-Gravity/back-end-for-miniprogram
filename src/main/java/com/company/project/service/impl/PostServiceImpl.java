@@ -34,5 +34,14 @@ public class PostServiceImpl extends AbstractService<Post> implements PostServic
 
     }
 
+    @Override
+    public List<PostResult> getMyList(MyRequestBody myRequestBody) {
+        MyPage myPage=new MyPage();
+        myPage.start=(myRequestBody.page-1)*myRequestBody.size;
+        myPage.size=myRequestBody.size;
+        return postMapper.getMyList(myPage);
+
+    }
+
 
 }

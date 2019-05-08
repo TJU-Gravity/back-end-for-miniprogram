@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class ReplyServiceImpl extends AbstractService<Reply> implements ReplySer
         ArrayList<ReplyResult> list=(ArrayList<ReplyResult>) replyMapper.getReplys(BigDecimal.valueOf(postid));
         if(list==null)
             return new ArrayList<>();
+
         return list;
     }
 

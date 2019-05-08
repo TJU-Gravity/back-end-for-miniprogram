@@ -1,7 +1,12 @@
 package com.company.project.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
-import java.util.Date;
+
+import java.sql.Timestamp;
 import javax.persistence.*;
 
 public class Post {
@@ -16,18 +21,24 @@ public class Post {
 
     private BigDecimal state;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     @Column(name = "postingTime")
-    private Date postingtime;
+    private Timestamp postingtime;
 
     private String title;
 
     private BigDecimal hits;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     @Column(name = "lastPost")
-    private Date lastpost;
+    private Timestamp lastpost;
 
     @Column(name = "postBody")
-    private byte[] postbody;
+    private String postbody;
+
+
+
+
 
     /**
      * @return postID
@@ -88,14 +99,16 @@ public class Post {
     /**
      * @return postingTime
      */
-    public Date getPostingtime() {
+
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    public Timestamp getPostingtime() {
         return postingtime;
     }
 
     /**
      * @param postingtime
      */
-    public void setPostingtime(Date postingtime) {
+    public void setPostingtime(Timestamp postingtime) {
         this.postingtime = postingtime;
     }
 
@@ -130,28 +143,25 @@ public class Post {
     /**
      * @return lastPost
      */
-    public Date getLastpost() {
+    public Timestamp getLastpost() {
         return lastpost;
     }
 
     /**
      * @param lastpost
      */
-    public void setLastpost(Date lastpost) {
+    public void setLastpost(Timestamp lastpost) {
         this.lastpost = lastpost;
     }
 
     /**
      * @return postBody
      */
-    public byte[] getPostbody() {
+    public String getPostbody() {
         return postbody;
     }
 
-    /**
-     * @param postbody
-     */
-    public void setPostbody(byte[] postbody) {
+    public void setPostbody(String postbody) {
         this.postbody = postbody;
     }
 }

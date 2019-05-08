@@ -12,5 +12,6 @@ import java.util.List;
 
 public interface PostMapper extends Mapper<Post> {
     List<PostResult> getList(MyPage myPage);
+    List<PostResult> getMyList(MyPage myPage);
 
 }

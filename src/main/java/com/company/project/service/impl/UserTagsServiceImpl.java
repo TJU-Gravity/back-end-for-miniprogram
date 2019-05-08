@@ -1,14 +1,18 @@
 package com.company.project.service.impl;
 
+import com.company.project.dao.UserMapper;
 import com.company.project.dao.UserTagsMapper;
+import com.company.project.model.User;
 import com.company.project.model.UserTags;
 import com.company.project.service.UserTagsService;
 import com.company.project.core.AbstractService;
+import com.company.project.service.model.CountTag;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -20,6 +24,8 @@ import java.util.List;
 public class UserTagsServiceImpl extends AbstractService<UserTags> implements UserTagsService {
     @Resource
     private UserTagsMapper usertagsMapper;
+    @Resource
+    private UserMapper userMapper;
     public void changeTags(List<String> tags, String username)
     {
         List<UserTags> userTags=usertagsMapper.findAllTags(username);
@@ -52,6 +58,26 @@ public class UserTagsServiceImpl extends AbstractService<UserTags> implements Us
 
 
 
+    }
+
+    @Override
+    public List<User> findUsersByTags(List<String> tags) {
+
+        List<CountTag> countTags=usertagsMapper.findUsersByTags(tags);
+        StringBuffer usernames=new StringBuffer();
+        usernames.append("(");
+        for(CountTag c :countTags)
+        {
+            if(c.count==tags.size())
+            {
+                usernames.append(c.username);
+                usernames.append(",");
+            }
+        }
+        usernames.deleteCharAt(usernames.length()-1);
+        usernames.append(")");
+
+        return  userMapper.selectByIds(usernames.toString());
     }
 
 }

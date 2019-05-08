@@ -1,5 +1,6 @@
 package com.company.project.service;
 import com.company.project.core.Service;
+import com.company.project.model.User;
 import com.company.project.model.UserTags;
 
 import java.util.List;
@@ -10,5 +11,6 @@ import java.util.List;
  */
 public interface UserTagsService extends Service<UserTags> {
     void changeTags(List<String> tags,String username);
+    List<User> findUsersByTags(List<String> tags);
 
 }

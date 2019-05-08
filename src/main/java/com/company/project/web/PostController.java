@@ -19,7 +19,11 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,16 +40,19 @@ public class PostController {
     @Resource
     private UserService uService;
 
-
+    //update
     @PostMapping("/add")
     public Result add(@RequestBody Post post) {
+        post.setPostingtime(new Timestamp(new Date().getTime()));
+        post.setLastpost(post.getPostingtime());
         postService.save(post);
         return ResultGenerator.genSuccessResult();
     }
 
+    //new ID
     @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
-        postService.deleteById(id);
+    public Result delete(@RequestBody MyRequestBody body) {
+        postService.deleteById(body.ID);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -65,12 +72,30 @@ public class PostController {
         return ResultGenerator.genSuccessResult(postDetail);
     }
 
-
+//new
     @PostMapping("/list")
     public Result list(@org.springframework.web.bind.annotation.RequestBody MyRequestBody myRequestBody) {
         PageHelper.startPage(myRequestBody.page, myRequestBody.size);
         List<PostResult> list =postService.getList(myRequestBody);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    //new 传username
+    @PostMapping("/myList")
+    public Result myList(@org.springframework.web.bind.annotation.RequestBody MyRequestBody myRequestBody) {
+        PageHelper.startPage(myRequestBody.page, myRequestBody.size);
+       //here
+        List<PostResult> list =postService.getMyList(myRequestBody);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
+    //new ID state
+    @PostMapping("/changeState")
+    public Result changeState(@org.springframework.web.bind.annotation.RequestBody MyRequestBody myRequestBody) {
+        Post post=postService.findById(myRequestBody.ID);
+        post.setState(myRequestBody.state);
+        postService.update(post);
+        return ResultGenerator.genSuccessResult();
     }
 }

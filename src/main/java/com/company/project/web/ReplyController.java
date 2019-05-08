@@ -1,13 +1,18 @@
 package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.Post;
 import com.company.project.model.Reply;
+import com.company.project.service.PostService;
 import com.company.project.service.ReplyService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,10 +23,17 @@ import java.util.List;
 public class ReplyController {
     @Resource
     private ReplyService replyService;
+    @Resource
+    private PostService postService;
 
+    //update
     @PostMapping("/add")
     public Result add(@RequestBody Reply reply) {
+        reply.setPostingtime(new Timestamp(new Date().getTime()));
         replyService.save(reply);
+        Post post=postService.findById(reply.getPostid());
+        post.setLastpost(reply.getPostingtime());
+        postService.update(post);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -39,7 +51,7 @@ public class ReplyController {
 
     @PostMapping("/detail")
     public Result detail(@RequestParam Integer id) {
-        Reply reply = replyService.findById(id);
+        Reply reply = replyService.findById(new BigDecimal(id));
         return ResultGenerator.genSuccessResult(reply);
     }
 
