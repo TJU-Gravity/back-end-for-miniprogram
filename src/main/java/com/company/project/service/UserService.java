@@ -10,4 +10,6 @@ public interface UserService extends Service<User> {
     User findByUsername(String username);
     void addUser(User u);
 
+    User findByOpenid(String openid);
+    void updateUsersig(User u);
 }

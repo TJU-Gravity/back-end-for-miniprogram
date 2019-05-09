@@ -24,4 +24,16 @@
   <select id="addUser" parameterType="com.company.project.model.User" >
     INSERT INTO guser ( username,nickname,pwd,gender,headshot,loc,phonenumber,introduction,email ) values(#{username},#{nickname},#{pwd},#{gender},#{headshot},#{loc},#{phonenumber},#{introduction},#{email})
   </select>
+
+  <select id="findByOpenid" parameterType="String" resultType="com.company.project.model.User">
+    SELECT * FROM guser WHERE openid=#{openid}
+  </select>
+
+  <update id="updateUsersig" parameterType="com.company.project.model.User">
+    UPDATE guser SET
+    user_sig = #{usersig},
+    expire_time = #{expiretime}
+    WHERE openid = #{openid}
+  </update>
+
 </mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Team">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="teamID" jdbcType="VARCHAR" property="teamid" />
+    <result column="team_name" jdbcType="VARCHAR" property="teamName" />
+    <result column="captainID" jdbcType="VARCHAR" property="captainid" />
+    <result column="member_num" jdbcType="VARCHAR" property="memberNum" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+  </resultMap>
+
+  <select id="findById" parameterType="String" resultType="com.company.project.model.Team">
+          SELECT * FROM team WHERE teamID = #{teamId}
+  </select>
+
+</mapper>

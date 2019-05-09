@@ -28,4 +28,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         guserMapper.addUser(u);
     }
 
+    public User findByOpenid(String openid)
+    {
+        return guserMapper.findByOpenid(openid);
+    }
+    public void updateUsersig(User u){ guserMapper.updateUsersig(u);}
 }

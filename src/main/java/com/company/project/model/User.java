@@ -2,6 +2,7 @@ package com.company.project.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Date;
 
 @Table(name = "guser")
 public class User {
@@ -29,6 +30,14 @@ public class User {
     private String email;
 
     private BigDecimal status;
+
+    private String openid;
+
+    @Column(name = "user_sig")
+    private String usersig;
+
+    @Column(name = "expire_time")
+    private Date expiretime;
 
     /**
      * @return username
@@ -183,4 +192,41 @@ public class User {
     public void setStatus(BigDecimal status) {
         this.status = status;
     }
+
+    /**
+     * @return openid
+     */
+    public String getOpenid() {
+        return openid;
+    }
+
+    /**
+     * @param openid
+     */
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+
+    /**
+     * @return usersig
+     */
+    public String getUsersig() {
+        return usersig;
+    }
+
+    /**
+     * @param usersig
+     */
+    public void setUsersig(String usersig) { this.usersig = usersig; }
+
+    /**
+     * @return expiretime
+     */
+    public Date getExpiretime() { return expiretime; }
+
+    /**
+     * @param expiretime
+     */
+    public void setExpiretime(Date expiretime) { this.expiretime = expiretime; }
 }
