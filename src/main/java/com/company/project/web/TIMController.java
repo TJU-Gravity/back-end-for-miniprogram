@@ -16,6 +16,7 @@ public class TIMController {
     @Resource
     private TIM tim;
 
+
     @PostMapping("/generatedSig")
     public Result genSig(String identifier){
         String Sig=tim.genSig(identifier);

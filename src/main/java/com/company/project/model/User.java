@@ -31,7 +31,7 @@ public class User {
 
     private BigDecimal status;
 
-    private String openid;
+
 
     @Column(name = "user_sig")
     private String usersig;
@@ -192,21 +192,6 @@ public class User {
     public void setStatus(BigDecimal status) {
         this.status = status;
     }
-
-    /**
-     * @return openid
-     */
-    public String getOpenid() {
-        return openid;
-    }
-
-    /**
-     * @param openid
-     */
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
 
     /**
      * @return usersig

@@ -16,6 +16,8 @@
     <result column="userPrivileges" jdbcType="INTEGER" property="userprivileges" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="user_sig" jdbcType="VARCHAR" property="usersig" />
+    <result column="expire_time" jdbcType="DATE" property="expiretime" />
   </resultMap>
 
   <select id="findByUsername" parameterType="String" resultType="com.company.project.model.User">
@@ -25,15 +27,11 @@
     INSERT INTO guser ( username,nickname,pwd,gender,headshot,loc,phonenumber,introduction,email ) values(#{username},#{nickname},#{pwd},#{gender},#{headshot},#{loc},#{phonenumber},#{introduction},#{email})
   </select>
 
-  <select id="findByOpenid" parameterType="String" resultType="com.company.project.model.User">
-    SELECT * FROM guser WHERE openid=#{openid}
-  </select>
-
   <update id="updateUsersig" parameterType="com.company.project.model.User">
     UPDATE guser SET
     user_sig = #{usersig},
     expire_time = #{expiretime}
-    WHERE openid = #{openid}
+    WHERE username = #{username}
   </update>
 
 </mapper>
