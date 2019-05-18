@@ -23,16 +23,16 @@ public class UserController {
     //NEW！
     @PostMapping("/loginWeChat")
     public Result loginWeChat(@RequestBody User u) {
+        userService.getOpenId(u);
         User user = userService.findByUsername(u.getUsername());
         if (user!=null)
             return ResultGenerator.genSuccessResult(user);
         else {
             userService.addUser(u);
-            return ResultGenerator.genSuccessResult(user);
+            return ResultGenerator.genSuccessResult(u);
         }
+
     }
-
-
 
     @PostMapping("/add")
     public Result add(User user) {
@@ -47,9 +47,12 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public Result update(User user) {
+    public Result update( @RequestBody User user) {
+
         userService.update(user);
-        return ResultGenerator.genSuccessResult();
+        user=userService.findByUsername(user.getUsername());
+
+        return ResultGenerator.genSuccessResult(user);
     }
 
     @PostMapping("/detail")

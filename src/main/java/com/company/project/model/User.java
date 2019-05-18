@@ -1,7 +1,12 @@
 package com.company.project.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "guser")
 public class User {
@@ -29,6 +34,49 @@ public class User {
     private String email;
 
     private BigDecimal status;
+
+
+    @Transient
+    private List<String> tags;
+    @Transient
+    private String code;
+
+    @JSONField(format="yyyy-MM-dd")
+    private Date expire_time;
+    private String user_sig;
+
+
+    public Date getExpire_time() {
+        return expire_time;
+    }
+
+    public void setExpire_time(Date expire_time) {
+        this.expire_time = expire_time;
+    }
+
+    public void setUser_sig(String user_sig) {
+        this.user_sig = user_sig;
+    }
+
+    public String getUser_sig() {
+        return user_sig;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
 
     /**
      * @return username
