@@ -1,6 +1,7 @@
 package com.company.project.service.impl;
 
 import com.company.project.core.ProjectConstant;
+import com.company.project.core.ServiceException;
 import com.company.project.dao.UserMapper;
 import com.company.project.model.Team;
 import com.company.project.model.User;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class TIM {
 
         //报错信息，用户不存在
         if(u==null){
-            return "";
+            throw new ServiceException("用户不存在");
         }
 
         Date currentDate = new Date(System.currentTimeMillis());
@@ -59,7 +60,6 @@ public class TIM {
         String userSig="";
 
 
-        boolean hh=exDate.after(currentDate);
 
         if(exDate==null||exDate.before(currentDate) || exDate.equals(currentDate)){
             GenTLSSignatureResult result = tls_sigature.genSig(sdkAppId, identifier, priKeyContent);
