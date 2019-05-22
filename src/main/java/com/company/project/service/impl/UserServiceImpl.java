@@ -54,6 +54,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         guserMapper.addUser(u);
     }
 
+
     @Override
     public void getOpenId(User u) {
         RestTemplate restTemplate = new RestTemplate();
@@ -74,5 +75,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     {
         return guserMapper.findByOpenid(openid);
     }
+
     public void updateUsersig(User u){ guserMapper.updateUsersig(u);}
 }

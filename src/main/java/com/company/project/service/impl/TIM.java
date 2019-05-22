@@ -1,6 +1,7 @@
 package com.company.project.service.impl;
 
 import com.company.project.core.ProjectConstant;
+import com.company.project.dao.UserMapper;
 import com.company.project.model.Team;
 import com.company.project.model.User;
 import com.tls.tls_sigature.tls_sigature;
@@ -27,12 +28,15 @@ public class TIM {
     private RestTemplate restTemplate=new RestTemplate();
 
     @Resource
-    private UserServiceImpl guserSevice;
+    private UserMapper guserMapper;
 
     @Resource
     private TeamServiceImpl teamService;
 
+
+
     /**
+     *
      * 登陆鉴权。
      * 访问数据库User表，如果expire_time字段存在，且不超期，直接返回user_sig字段
      * 否则，请求TIM，获取(user_sig，expire_time)，存ho，
@@ -41,27 +45,36 @@ public class TIM {
      */
     public String genSig(String identifier){
 
-        User u= guserSevice.findByOpenid(identifier);
+        User u= guserMapper.findByUsername(identifier);
+
+        //报错信息，用户不存在
+        if(u==null){
+            return "";
+        }
 
         Date currentDate = new Date(System.currentTimeMillis());
-        Date exDate = u.getExpiretime();
+
+        Date exDate = u.getExpire_time();
 
         String userSig="";
 
-        if(exDate.after(currentDate) || exDate.equals(currentDate)){
+
+        boolean hh=exDate.after(currentDate);
+
+        if(exDate==null||exDate.before(currentDate) || exDate.equals(currentDate)){
             GenTLSSignatureResult result = tls_sigature.genSig(sdkAppId, identifier, priKeyContent);
             userSig=result.urlSig;
 
             //更新数据库
-            u.setUsersig(userSig);
+            u.setUser_sig(userSig);
             Calendar c = Calendar.getInstance();
             c.add(Calendar.MONTH,6);
             exDate = new Date(c.getTimeInMillis());
-            u.setExpiretime(exDate);
-            guserSevice.updateUsersig(u);
+            u.setExpire_time(exDate);
+            guserMapper.updateUsersig(u);
 
         }else{
-            userSig=u.getUsersig();
+            userSig=u.getUser_sig();
         }
         return  userSig;
     }

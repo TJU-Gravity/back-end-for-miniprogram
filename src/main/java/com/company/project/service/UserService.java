@@ -9,8 +9,10 @@ import com.company.project.model.User;
 public interface UserService extends Service<User> {
     User findByUsername(String username);
     void addUser(User u);
+
     void getOpenId(User u);
 
     User findByOpenid(String openid);
+
     void updateUsersig(User u);
 }
