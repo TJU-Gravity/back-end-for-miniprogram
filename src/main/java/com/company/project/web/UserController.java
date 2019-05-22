@@ -3,6 +3,7 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.User;
 import com.company.project.service.UserService;
+import com.company.project.service.UserTagsService;
 import com.company.project.web.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -19,7 +20,8 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
-
+@Resource
+private UserTagsService userTagsService;
     //NEW！
     @PostMapping("/loginWeChat")
     public Result loginWeChat(@RequestBody User u) {

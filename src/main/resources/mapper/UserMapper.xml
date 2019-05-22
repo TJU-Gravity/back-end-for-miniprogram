@@ -23,6 +23,13 @@
   <select id="findByUsername" parameterType="String" resultType="com.company.project.model.User">
     SELECT * FROM guser WHERE username=#{username}
   </select>
+  <select id="findByUsernames" resultType="com.company.project.model.User">
+    SELECT * FROM guser  WHERE username in
+    <foreach item="username" collection="usernames" open="(" separator="," close=")">
+      #{username}
+    </foreach>
+    </select>
+
   <select id="addUser" parameterType="com.company.project.model.User" >
     INSERT INTO guser ( username,nickname,pwd,gender,headshot,loc,phonenumber,introduction,email ) values(#{username},#{nickname},#{pwd},#{gender},#{headshot},#{loc},#{phonenumber},#{introduction},#{email})
   </select>
