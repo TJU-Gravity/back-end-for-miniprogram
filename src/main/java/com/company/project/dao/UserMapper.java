@@ -10,4 +10,7 @@ public interface UserMapper extends Mapper<User> {
     public User findByUsername(String username);
     public List<User> findByUsernames(@Param("usernames")List<String> usernames);
     public void addUser(User u);
+
+    public User findByOpenid(String openid);
+    public void updateUsersig(User u);
 }
