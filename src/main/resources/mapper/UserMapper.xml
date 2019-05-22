@@ -29,8 +29,8 @@
 
   <update id="updateUsersig" parameterType="com.company.project.model.User">
     UPDATE guser SET
-    user_sig = #{usersig},
-    expire_time = #{expiretime}
+    user_sig = #{user_sig},
+    expire_time = #{expire_time}
     WHERE username = #{username}
   </update>
 

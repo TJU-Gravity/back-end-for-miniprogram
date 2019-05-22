@@ -1,5 +1,7 @@
 package com.company.project.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -32,12 +34,9 @@ public class User {
     private BigDecimal status;
 
 
-
-    @Column(name = "user_sig")
-    private String usersig;
-
-    @Column(name = "expire_time")
-    private Date expiretime;
+    @JSONField(format="yyyy-MM-dd")
+    private Date expire_time;
+    private String user_sig;
 
     /**
      * @return username
@@ -193,25 +192,23 @@ public class User {
         this.status = status;
     }
 
-    /**
-     * @return usersig
-     */
-    public String getUsersig() {
-        return usersig;
+
+
+    public Date getExpire_time() {
+        return expire_time;
     }
 
-    /**
-     * @param usersig
-     */
-    public void setUsersig(String usersig) { this.usersig = usersig; }
+    public void setExpire_time(Date expire_time) {
+        this.expire_time = expire_time;
+    }
 
-    /**
-     * @return expiretime
-     */
-    public Date getExpiretime() { return expiretime; }
+    public void setUser_sig(String user_sig) {
+        this.user_sig = user_sig;
+    }
 
-    /**
-     * @param expiretime
-     */
-    public void setExpiretime(Date expiretime) { this.expiretime = expiretime; }
+    public String getUser_sig() {
+        return user_sig;
+    }
+
+
 }

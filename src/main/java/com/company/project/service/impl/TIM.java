@@ -54,24 +54,27 @@ public class TIM {
 
         Date currentDate = new Date(System.currentTimeMillis());
 
-        java.sql.Date exDate = u.getExpiretime();
+        Date exDate = u.getExpire_time();
 
         String userSig="";
 
-        if(exDate==null||exDate.after(currentDate) || exDate.equals(currentDate)){
+
+        boolean hh=exDate.after(currentDate);
+
+        if(exDate==null||exDate.before(currentDate) || exDate.equals(currentDate)){
             GenTLSSignatureResult result = tls_sigature.genSig(sdkAppId, identifier, priKeyContent);
             userSig=result.urlSig;
 
             //更新数据库
-            u.setUsersig(userSig);
+            u.setUser_sig(userSig);
             Calendar c = Calendar.getInstance();
             c.add(Calendar.MONTH,6);
             exDate = new Date(c.getTimeInMillis());
-            u.setExpiretime(exDate);
+            u.setExpire_time(exDate);
             guserMapper.updateUsersig(u);
 
         }else{
-            userSig=u.getUsersig();
+            userSig=u.getUser_sig();
         }
         return  userSig;
     }
