@@ -32,7 +32,7 @@ public class UserTagsController {
     public Result findUsers(@RequestBody MyRequestBody userTags) {
 
        //here
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult( userTagsService.findUsersByTags(userTags.tags));
     }
 
     @PostMapping("/add")

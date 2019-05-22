@@ -19,6 +19,7 @@ public class PostResult {
         public BigDecimal teamid;
 
         public String headshot;
+        public BigDecimal state;
 
         @JSONField(format="yyyy-MM-dd HH:mm:ss")
         public Timestamp postingtime;

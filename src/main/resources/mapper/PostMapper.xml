@@ -16,11 +16,11 @@
     <result column="LASTPOST" jdbcType="TIMESTAMP" property="lastpost" />
     <result column="POSTBODY" jdbcType="CLOB" property="postbody" />
   </resultMap>
-  <select id="getList" parameterType="com.company.project.web.model.MyPage" resultType="com.company.project.web.model.PostResult">
-    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,nickname,headshot from guser as u join post as p on (u.username=p.posterid) order by lastpost DESC
+  <select id="getList"  resultType="com.company.project.web.model.PostResult">
+    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,nickname,headshot,state from guser as u join post as p on (u.username=p.posterid) order by lastpost DESC
   </select>
 
-  <select id="getMyList" parameterType="com.company.project.web.model.MyPage" resultType="com.company.project.web.model.PostResult">
-    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,nickname,headshot from guser as u join post as p on (u.username=p.posterid) where u.username=#{username} order by lastpost DESC
+  <select id="getMyList" parameterType="String" resultType="com.company.project.web.model.PostResult">
+    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,state from post where posterid=#{username} order by lastpost DESC
   </select>
 </mapper>

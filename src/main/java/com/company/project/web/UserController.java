@@ -3,6 +3,7 @@ import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.User;
 import com.company.project.service.UserService;
+import com.company.project.service.UserTagsService;
 import com.company.project.web.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -19,20 +20,21 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
-
+@Resource
+private UserTagsService userTagsService;
     //NEW！
     @PostMapping("/loginWeChat")
     public Result loginWeChat(@RequestBody User u) {
+        userService.getOpenId(u);
         User user = userService.findByUsername(u.getUsername());
         if (user!=null)
             return ResultGenerator.genSuccessResult(user);
         else {
             userService.addUser(u);
-            return ResultGenerator.genSuccessResult(user);
+            return ResultGenerator.genSuccessResult(u);
         }
+
     }
-
-
 
     @PostMapping("/add")
     public Result add(User user) {
@@ -47,9 +49,12 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public Result update(User user) {
+    public Result update( @RequestBody User user) {
+
         userService.update(user);
-        return ResultGenerator.genSuccessResult();
+        user=userService.findByUsername(user.getUsername());
+
+        return ResultGenerator.genSuccessResult(user);
     }
 
     @PostMapping("/detail")

@@ -8,7 +8,7 @@ public class MyRequestBody {
     public Integer page=0;
     public Integer size=0;
     public String username="";
-    public Integer ID;
+    public BigDecimal ID;
     public BigDecimal state;
     public ArrayList<String> tags=new ArrayList<>();
 

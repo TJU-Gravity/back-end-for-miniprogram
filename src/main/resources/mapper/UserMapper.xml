@@ -16,13 +16,22 @@
     <result column="userPrivileges" jdbcType="INTEGER" property="userprivileges" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="user_sig" jdbcType="VARCHAR" property="usersig" />
-    <result column="expire_time" jdbcType="DATE" property="expiretime" />
+
+    <result column="user_sig" jdbcType="VARCHAR" property="user_sig" />
+    <result column="expire_time" jdbcType="DATE" property="expire_time" />
+
   </resultMap>
 
   <select id="findByUsername" parameterType="String" resultType="com.company.project.model.User">
     SELECT * FROM guser WHERE username=#{username}
   </select>
+  <select id="findByUsernames" resultType="com.company.project.model.User">
+    SELECT * FROM guser  WHERE username in
+    <foreach item="username" collection="usernames" open="(" separator="," close=")">
+      #{username}
+    </foreach>
+    </select>
+
   <select id="addUser" parameterType="com.company.project.model.User" >
     INSERT INTO guser ( username,nickname,pwd,gender,headshot,loc,phonenumber,introduction,email ) values(#{username},#{nickname},#{pwd},#{gender},#{headshot},#{loc},#{phonenumber},#{introduction},#{email})
   </select>

@@ -23,9 +23,9 @@ import java.util.List;
 public class ReplyServiceImpl extends AbstractService<Reply> implements ReplyService {
     @Resource
     private ReplyMapper replyMapper;
-    public List<ReplyResult> getReplys(int postid)
+    public List<ReplyResult> getReplys(BigDecimal postid)
     {
-        ArrayList<ReplyResult> list=(ArrayList<ReplyResult>) replyMapper.getReplys(BigDecimal.valueOf(postid));
+        ArrayList<ReplyResult> list=(ArrayList<ReplyResult>) replyMapper.getReplys(postid);
         if(list==null)
             return new ArrayList<>();
 

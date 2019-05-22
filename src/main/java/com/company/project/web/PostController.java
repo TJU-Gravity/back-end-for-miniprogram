@@ -65,7 +65,7 @@ public class PostController {
     @PostMapping("/detail")
     public Result detail(@RequestBody MyRequestBody body) {
         PostDetail postDetail=new PostDetail();
-        postDetail.post=postService.findById(BigDecimal.valueOf(body.ID));
+        postDetail.post=postService.findById(body.ID);
         postDetail.replies=replyService.getReplys(body.ID);
         postDetail.user=uService.findByUsername(postDetail.post.getPosterid());
 
@@ -90,6 +90,7 @@ public class PostController {
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
+
     //new ID state
     @PostMapping("/changeState")
     public Result changeState(@org.springframework.web.bind.annotation.RequestBody MyRequestBody myRequestBody) {
