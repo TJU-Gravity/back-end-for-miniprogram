@@ -20,10 +20,10 @@
           SELECT * FROM team WHERE teamID = #{teamId}
   </select>
 
-  <insert id="insertTeam" parameterType="com.company.project.model.Team" useGeneratedKeys="true" keyProperty="teamID">
+  <insert id="insertTeam" parameterType="com.company.project.model.Team" useGeneratedKeys="true" keyProperty="teamid">
     insert into team(team_name,captanID,member_num,create_date,avatar,introduction,member_left,label)
     values (#{teamName},#{captainid},#{memberNum},#{createDate},#{avatar},#{introduction},#{member_left},#{label})
-  </insert>>
+  </insert>
 
   <update id="updateById" parameterType="com.company.project.model.Team">
        update team set

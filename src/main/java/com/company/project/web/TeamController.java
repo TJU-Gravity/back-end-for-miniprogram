@@ -2,7 +2,6 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.Team;
-import com.company.project.model.User;
 import com.company.project.service.TeamService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,15 +19,14 @@ public class TeamController {
     @Resource
     private TeamService teamService;
 
-    @PostMapping("/team/add")
-    public Result add(@RequestBody Team team) {
+    @PostMapping("/add")
+    public Result addTeam(@RequestBody Team team) {
         teamService.addTeam(team);
         //userTeamService.addUser(user);
         return ResultGenerator.genSuccessResult("创建成功");
-
     }
 
-    @PostMapping("/team/addMember")
+    @PostMapping("/addMember")
     public Result addMember(String team_id) {
         teamService.addMember(team_id);
         //userTeamService.addUser(user);
@@ -36,7 +34,7 @@ public class TeamController {
 
     }
 
-    @PostMapping("/team/removeMember")
+    @PostMapping("/removeMember")
     public Result removeMember(String team_id) {
         teamService.removeMember(team_id);
         return ResultGenerator.genSuccessResult("删除成员team表操作成功");
@@ -44,7 +42,7 @@ public class TeamController {
     }
 
 
-    @PostMapping("/team/detail")
+    @PostMapping("/detail")
     public Result detail(@RequestParam Integer id) {
         Team team = teamService.findById(id);
         return ResultGenerator.genSuccessResult(team);
