@@ -5,6 +5,7 @@ import com.company.project.web.model.MyRequestBody;
 import com.company.project.web.model.PostDetail;
 import com.company.project.web.model.PostResult;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -12,8 +13,9 @@ import java.util.List;
  * Created by CodeGenerator on 2018/11/06.
  */
 public interface PostService extends Service<Post> {
-    public List<PostResult> getList(MyRequestBody myRequestBody);
-    public List<PostResult> getMyList(MyRequestBody myRequestBody);
+    List<PostResult> getList(MyRequestBody myRequestBody);
+    List<PostResult> getMyList(MyRequestBody myRequestBody);
+    void addMember(BigDecimal teamID,int member);
 
 
 }

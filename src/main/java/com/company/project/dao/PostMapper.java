@@ -13,5 +13,6 @@ import java.util.List;
 public interface PostMapper extends Mapper<Post> {
     List<PostResult> getList();
     List<PostResult> getMyList(String username);
+    Post findPostByTeamID(BigDecimal teamid);
 
 }

@@ -37,6 +37,9 @@ public class Post {
     private String postbody;
 
 
+    @Id
+    @Column(name = "teamID")
+    private BigDecimal teamid;
 
 
 
