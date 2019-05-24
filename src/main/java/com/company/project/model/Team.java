@@ -25,6 +25,7 @@ public class Team {
 
     private String introduction;
 
+    private int member_left;
     /**
      * 以 | 分隔 
      */
@@ -121,13 +122,28 @@ public class Team {
         return introduction;
     }
 
+
+    /**
+     * @param member_left
+     */
+    public void setMember_left(int member_left) {
+        this.member_left = member_left;
+    }
+
+
+    /**
+     * @return member_left
+     */
+    public int getMember_left() {
+        return member_left;
+    }
+
     /**
      * @param introduction
      */
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
-
     /**
      * 获取以 | 分隔 
      *
