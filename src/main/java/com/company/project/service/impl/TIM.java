@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class TIM {
         String userSig="";
 
 
-        boolean hh=exDate.after(currentDate);
+
 
         if(exDate==null||exDate.before(currentDate) || exDate.equals(currentDate)){
             GenTLSSignatureResult result = tls_sigature.genSig(sdkAppId, identifier, priKeyContent);
