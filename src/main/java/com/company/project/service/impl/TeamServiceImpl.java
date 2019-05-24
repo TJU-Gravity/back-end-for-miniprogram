@@ -24,7 +24,7 @@ public class TeamServiceImpl extends AbstractService<Team> implements TeamServic
 
 
 
-    public Team findById(String teamId){return  teamMapper.findById(teamId);}
+    public Team findById(int teamId){return  teamMapper.findById(teamId);}
 
     /**
      * 在team表新增队伍记录
@@ -41,15 +41,21 @@ public class TeamServiceImpl extends AbstractService<Team> implements TeamServic
 
     /**
      * 在team表更新对应teamID记录的member_left字段
-     * @param teamID
+     * 需确保member_left不是0
+     * @param teamId
      */
-    public void addMember(String teamID){
+    public void addMember(int teamId){
         try {
-            Team team=teamMapper.findById(teamID);
+            Team team=teamMapper.findById(teamId);
+
             if(team==null){
-                throw new ServiceException("队伍不存在");
+                throw new ServiceException("队伍不存在"); //BAD REQUEST 400
             }
             int member_left=team.getMember_left();
+
+            if(member_left==0){
+                throw new ServiceException("已招满");  //BAD REQUEST 400
+            }
             member_left-=1;
             team.setMember_left(member_left);
             teamMapper.updateById(team);
@@ -60,16 +66,21 @@ public class TeamServiceImpl extends AbstractService<Team> implements TeamServic
 
     /**
      * 在team表更新对应teamID记录的member_left字段
-     * @param teamID
+     * 需确保member_left不等于member_num
+     * @param teamId
      */
-    public void removeMember(String teamID){
+    public void removeMember(int teamId){
 
         try {
-            Team team=teamMapper.findById(teamID);
+            Team team=teamMapper.findById(teamId);
             if(team==null){
                 throw new ServiceException("队伍不存在");
             }
             int member_left=team.getMember_left();
+            int member_num=team.getMember_Num();
+            if(member_left==member_num){
+                throw new ServiceException("队里没有队员可移出");
+            }
             member_left+=1;
             team.setMember_left(member_left);
             teamMapper.updateById(team);

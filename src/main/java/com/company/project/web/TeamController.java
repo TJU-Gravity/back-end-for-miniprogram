@@ -19,7 +19,7 @@ public class TeamController {
     @Resource
     private TeamService teamService;
 
-    @PostMapping("/add")
+    @PostMapping(value="/add")
     public Result addTeam(@RequestBody Team team) {
         teamService.addTeam(team);
         //userTeamService.addUser(user);
@@ -27,7 +27,7 @@ public class TeamController {
     }
 
     @PostMapping("/addMember")
-    public Result addMember(String team_id) {
+    public Result addMember(int team_id) {
         teamService.addMember(team_id);
         //userTeamService.addUser(user);
         return ResultGenerator.genSuccessResult("添加成员team表操作成功");
@@ -35,7 +35,7 @@ public class TeamController {
     }
 
     @PostMapping("/removeMember")
-    public Result removeMember(String team_id) {
+    public Result removeMember(int team_id) {
         teamService.removeMember(team_id);
         return ResultGenerator.genSuccessResult("删除成员team表操作成功");
 

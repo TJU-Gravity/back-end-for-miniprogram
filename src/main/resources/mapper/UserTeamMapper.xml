@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.UserTeamMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.UserTeam">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="username" jdbcType="VARCHAR" property="username" />
+    <id column="teamID" jdbcType="INTEGER" property="teamid" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="headshot" jdbcType="VARCHAR" property="headshot" />
+    <result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="team_name" jdbcType="VARCHAR" property="team_name" />
+  </resultMap>
+
+  <insert id="insertUserTeam" parameterType="com.company.project.model.UserTeam">
+    insert into user_team(username,teamID,nickname,headshot,phoneNumber,team_name)
+    values (#{username},#{teamid},#{nickname},#{headshot},#{phonenumber},#{team_name})
+  </insert>
+  <delete id="deleteUserTeam">
+    delete from user_team where username=#{username} and teamID=#{teamId}
+  </delete>
+</mapper>

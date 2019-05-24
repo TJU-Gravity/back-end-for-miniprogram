@@ -9,9 +9,9 @@ import com.company.project.model.User;
  * Created by CodeGenerator on 2019/05/09.
  */
 public interface TeamService extends Service<Team> {
-    Team findById(String teamId);
+    Team findById(int teamId);
     void addTeam(Team team);
-    void addMember(String teamID);
-    void removeMember(String teamID);
+    void addMember(int teamId);
+    void removeMember(int teamId);
     //boolean addUser(String teamId, User user);
 }

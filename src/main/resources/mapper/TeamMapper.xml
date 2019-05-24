@@ -5,10 +5,10 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="teamID" jdbcType="VARCHAR" property="teamid" />
-    <result column="team_name" jdbcType="VARCHAR" property="teamName" />
+    <id column="teamID" jdbcType="INTEGER" property="teamid" />
+    <result column="team_name" jdbcType="VARCHAR" property="team_name" />
     <result column="captainID" jdbcType="VARCHAR" property="captainid" />
-    <result column="member_num" jdbcType="VARCHAR" property="memberNum" />
+    <result column="member_num" jdbcType="INTEGER" property="member_num" />
     <result column="create_date" jdbcType="DATE" property="createDate" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
@@ -16,25 +16,25 @@
     <result column="label" jdbcType="VARCHAR" property="label" />
   </resultMap>
 
-  <select id="findById" parameterType="String" resultType="com.company.project.model.Team">
+  <select id="findById" parameterType="int" resultType="com.company.project.model.Team">
           SELECT * FROM team WHERE teamID = #{teamId}
   </select>
 
   <insert id="insertTeam" parameterType="com.company.project.model.Team" useGeneratedKeys="true" keyProperty="teamid">
-    insert into team(team_name,captanID,member_num,create_date,avatar,introduction,member_left,label)
-    values (#{teamName},#{captainid},#{memberNum},#{createDate},#{avatar},#{introduction},#{member_left},#{label})
+    insert into team(team_name,captainID,member_num,create_date,avatar,introduction,member_left,label)
+    values (#{team_name},#{captainid},#{member_num},#{create_date},#{avatar},#{introduction},#{member_left},#{label})
   </insert>
 
   <update id="updateById" parameterType="com.company.project.model.Team">
        update team set
-       team_name=#{teamName}
-       captainID=#{captainid}
-       member_num=#{memberNum}
-       avatar=#{avatar}
-       introduction=#{introduction}
-       member_left=#{member_left}
+       team_name=#{team_name},
+       captainID=#{captainid},
+       member_num=#{member_num},
+       avatar=#{avatar},
+       introduction=#{introduction},
+       member_left=#{member_left},
        label=#{label}
-       where teamID=#{team_id}
+       where teamID=#{teamid}
    </update>
 
 
