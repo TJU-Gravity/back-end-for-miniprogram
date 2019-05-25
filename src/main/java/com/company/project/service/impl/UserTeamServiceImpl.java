@@ -25,16 +25,8 @@ public class UserTeamServiceImpl extends AbstractService<UserTeam> implements Us
     @Resource
     private TeamMapper teamMapper;
 
-    public void addUserToTeam(User u, int teamId){
-        UserTeam ut = new UserTeam();
-        ut.setHeadshot(u.getHeadshot());
-        ut.setNickname(u.getNickname());
-        ut.setPhonenumber(u.getPhonenumber());
-        ut.setTeamid(teamId);
-        Team t =teamMapper.findById(teamId);
-        String teamName = t.getTeam_name();
-        ut.setTeam_name(teamName);
-        userTeamMapper.insertUserTeam(ut);
+    public void addUserToTeam(UserTeam userTeam){
+        userTeamMapper.insertUserTeam(userTeam);
     };
     public void removeUserFromTeam(String username,int teamId){
         userTeamMapper.deleteUserTeam(username,teamId);

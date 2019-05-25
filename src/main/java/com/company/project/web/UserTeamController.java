@@ -24,13 +24,13 @@ public class UserTeamController {
 
     @PostMapping("/add")
     public Result add(UserTeam userTeam) {
-        userTeamService.save(userTeam);
+        userTeamService.addUserToTeam(userTeam);
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestParam Integer id) {
-        userTeamService.deleteById(id);
+    public Result delete(@RequestParam String username,@RequestParam int teamId) {
+        userTeamService.removeUserFromTeam(username,teamId);
         return ResultGenerator.genSuccessResult();
     }
 

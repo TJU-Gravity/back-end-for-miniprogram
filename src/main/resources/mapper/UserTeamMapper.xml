@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="username" jdbcType="VARCHAR" property="username" />
-    <id column="teamID" jdbcType="INTEGER" property="teamid" />
+    <result column="teamID" jdbcType="INTEGER" property="teamid" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="headshot" jdbcType="VARCHAR" property="headshot" />
     <result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
