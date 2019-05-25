@@ -1,9 +1,7 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.TeamMapper;
+
 import com.company.project.dao.UserTeamMapper;
-import com.company.project.model.Team;
-import com.company.project.model.User;
 import com.company.project.model.UserTeam;
 import com.company.project.service.UserTeamService;
 import com.company.project.core.AbstractService;
@@ -22,13 +20,11 @@ public class UserTeamServiceImpl extends AbstractService<UserTeam> implements Us
     @Resource
     private UserTeamMapper userTeamMapper;
 
-    @Resource
-    private TeamMapper teamMapper;
-
     public void addUserToTeam(UserTeam userTeam){
         userTeamMapper.insertUserTeam(userTeam);
     };
     public void removeUserFromTeam(String username,int teamId){
         userTeamMapper.deleteUserTeam(username,teamId);
     };
+
 }

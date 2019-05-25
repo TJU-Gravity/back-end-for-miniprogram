@@ -5,9 +5,11 @@ import javax.persistence.*;
 @Table(name = "user_team")
 public class UserTeam {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String username;
 
-    @Id
     @Column(name = "teamID")
     private Integer teamid;
 
@@ -20,6 +22,20 @@ public class UserTeam {
 
     @Column(name = "team_name")
     private String team_name;
+
+    /**
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     /**
      * @return username

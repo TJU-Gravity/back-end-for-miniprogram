@@ -5,10 +5,7 @@ import com.company.project.model.UserTeam;
 import com.company.project.service.UserTeamService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,13 +20,13 @@ public class UserTeamController {
     private UserTeamService userTeamService;
 
     @PostMapping("/add")
-    public Result add(UserTeam userTeam) {
+    public Result add(@RequestBody UserTeam userTeam) {
         userTeamService.addUserToTeam(userTeam);
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/delete")
-    public Result delete(@RequestParam String username,@RequestParam int teamId) {
+    public Result delete(String username,int teamId) {
         userTeamService.removeUserFromTeam(username,teamId);
         return ResultGenerator.genSuccessResult();
     }

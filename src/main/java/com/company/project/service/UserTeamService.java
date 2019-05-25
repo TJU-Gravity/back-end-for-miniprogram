@@ -1,5 +1,4 @@
 package com.company.project.service;
-import com.company.project.model.User;
 import com.company.project.model.UserTeam;
 import com.company.project.core.Service;
 
