@@ -38,6 +38,9 @@ public class Post {
 
 
 
+    @Column(name = "teamID")
+    private BigDecimal teamid;
+
 
 
     /**

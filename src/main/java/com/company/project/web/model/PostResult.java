@@ -39,4 +39,5 @@ public class PostResult {
         public String nickname;
 
 
+
 }

@@ -38,5 +38,12 @@ public class PostServiceImpl extends AbstractService<Post> implements PostServic
 
     }
 
+    @Override
+    public void addMember(BigDecimal teamID,int member) {
+        Post post=postMapper.findPostByTeamID(teamID);
+        post.setState(post.getState().subtract(BigDecimal.valueOf(member)));
+        this.update(post);
+    }
+
 
 }

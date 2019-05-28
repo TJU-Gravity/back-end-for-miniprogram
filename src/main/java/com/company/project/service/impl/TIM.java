@@ -1,6 +1,7 @@
 package com.company.project.service.impl;
 
 import com.company.project.core.ProjectConstant;
+import com.company.project.core.ServiceException;
 import com.company.project.dao.UserMapper;
 import com.company.project.model.Team;
 import com.company.project.model.User;
@@ -49,7 +50,7 @@ public class TIM {
 
         //报错信息，用户不存在
         if(u==null){
-            return "";
+            throw new ServiceException("用户不存在");
         }
 
         Date currentDate = new Date(System.currentTimeMillis());
@@ -57,7 +58,6 @@ public class TIM {
         Date exDate = u.getExpire_time();
 
         String userSig="";
-
 
 
 
