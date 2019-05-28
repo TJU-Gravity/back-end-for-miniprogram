@@ -2,7 +2,10 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.UserTeam;
+import com.company.project.service.PostService;
+import com.company.project.service.TeamService;
 import com.company.project.service.UserTeamService;
+import com.company.project.web.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -18,16 +21,30 @@ import java.util.List;
 public class UserTeamController {
     @Resource
     private UserTeamService userTeamService;
+    @Resource
+    private TeamService teamService;
+    @Resource
+    private PostService postService;
 
+    //!
     @PostMapping("/add")
     public Result add(@RequestBody UserTeam userTeam) {
-        userTeamService.addUserToTeam(userTeam);
+        userTeamService.save(userTeam);
+        teamService.addMember(userTeam.getTeamid());
+
+        postService.addMember(userTeam.getTeamid(),1);
         return ResultGenerator.genSuccessResult();
     }
 
+    //!
     @PostMapping("/delete")
-    public Result delete(String username,int teamId) {
-        userTeamService.removeUserFromTeam(username,teamId);
+    public Result delete(@RequestBody UserTeam userTeam) {
+
+        userTeamService.removeUserFromTeam(userTeam);
+        teamService.removeMember(userTeam.getTeamid());
+
+        postService.addMember(userTeam.getTeamid(),-1);
+
         return ResultGenerator.genSuccessResult();
     }
 

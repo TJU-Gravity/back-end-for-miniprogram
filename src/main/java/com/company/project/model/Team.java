@@ -2,12 +2,16 @@ package com.company.project.model;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Team {
     @Id
     @Column(name = "teamID")
-    private String teamid;
+    private BigDecimal teamid;
 
     @Column(name = "team_name")
     private String team_name;
@@ -25,23 +29,39 @@ public class Team {
 
     private String introduction;
 
-    private int member_left;
+    @Transient
+    private List<User> members;
+
+
+
+
+    public List<User> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<User> members) {
+        this.members = members;
+    }
+
+    public int getMember_num() {
+        return member_num;
+    }
+
+    public void setMember_num(int member_num) {
+        this.member_num = member_num;
+    }
+
     /**
      * 以 | 分隔
      */
     private String label;
 
-    /**
-     * @return teamID
-     */
-    public String getTeamid() {
+
+    public BigDecimal getTeamid() {
         return teamid;
     }
 
-    /**
-     * @param teamid
-     */
-    public void setTeamid(String teamid) {
+    public void setTeamid(BigDecimal teamid) {
         this.teamid = teamid;
     }
 
@@ -123,20 +143,6 @@ public class Team {
     }
 
 
-    /**
-     * @param member_left
-     */
-    public void setMember_left(int member_left) {
-        this.member_left = member_left;
-    }
-
-
-    /**
-     * @return member_left
-     */
-    public int getMember_left() {
-        return member_left;
-    }
 
     /**
      * @param introduction

@@ -5,37 +5,27 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="teamID" jdbcType="INTEGER" property="teamid" />
+    <id column="teamID" jdbcType="NUMERIC" property="teamid" />
     <result column="team_name" jdbcType="VARCHAR" property="team_name" />
     <result column="captainID" jdbcType="VARCHAR" property="captainid" />
     <result column="member_num" jdbcType="INTEGER" property="member_num" />
-    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="create_date" jdbcType="DATE" property="create_date" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-    <result column="member_left" jdbcType="INTEGER" property="member_left" />
+
     <result column="label" jdbcType="VARCHAR" property="label" />
   </resultMap>
 
-  <select id="findById" parameterType="int" resultType="com.company.project.model.Team">
-          SELECT * FROM team WHERE teamID = #{teamId}
-  </select>
-
-  <insert id="insertTeam" parameterType="com.company.project.model.Team" useGeneratedKeys="true" keyProperty="teamid">
-    insert into team(team_name,captainID,member_num,create_date,avatar,introduction,member_left,label)
-    values (#{team_name},#{captainid},#{member_num},#{create_date},#{avatar},#{introduction},#{member_left},#{label})
+  <insert id="add" parameterType="com.company.project.model.Team">
+    insert into team (team_name,captainID,member_num,create_date,avatar,introduction,label)
+    values (#{team_name},#{captainid},#{member_num},#{create_date},#{avatar},#{introduction},#{label})
+    <selectKey resultType="BigDecimal" order="AFTER" keyProperty="teamid">
+      SELECT LAST_INSERT_ID() AS teamid
+    </selectKey>
   </insert>
 
-  <update id="updateById" parameterType="com.company.project.model.Team">
-       update team set
-       team_name=#{team_name},
-       captainID=#{captainid},
-       member_num=#{member_num},
-       avatar=#{avatar},
-       introduction=#{introduction},
-       member_left=#{member_left},
-       label=#{label}
-       where teamID=#{teamid}
-   </update>
-
+  <select id="getMyList" parameterType="String" resultType="com.company.project.model.Team">
+    select * from team as t join user_team as u on t.teamid=u.teamid where u.username=#{username}
+  </select>
 
 </mapper>

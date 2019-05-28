@@ -10,6 +10,7 @@ public class MyRequestBody {
     public String username="";
     public BigDecimal ID;
     public BigDecimal state;
+
     public ArrayList<String> tags=new ArrayList<>();
 
 }

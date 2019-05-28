@@ -42,10 +42,21 @@ public class Post {
     private BigDecimal teamid;
 
 
+    @Transient
+    public Team team;
+
+    public BigDecimal getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(BigDecimal teamid) {
+        this.teamid = teamid;
+    }
 
     /**
      * @return postID
      */
+
     public BigDecimal getPostid() {
         return postid;
     }
