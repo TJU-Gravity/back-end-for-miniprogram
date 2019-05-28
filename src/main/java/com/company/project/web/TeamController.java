@@ -5,10 +5,7 @@ import com.company.project.model.Team;
 import com.company.project.service.TeamService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,11 +19,36 @@ public class TeamController {
     @Resource
     private TeamService teamService;
 
-    @PostMapping("/add")
-    public Result add(Team team) {
-        teamService.save(team);
-        return ResultGenerator.genSuccessResult();
+    @PostMapping(value="/add")
+    public Result addTeam(@RequestBody Team team) {
+        teamService.addTeam(team);
+        //userTeamService.addUser(user);
+        return ResultGenerator.genSuccessResult("创建成功");
     }
+
+    @PostMapping("/addMember")
+    public Result addMember(int team_id) {
+        teamService.addMember(team_id);
+        //userTeamService.addUser(user);
+        return ResultGenerator.genSuccessResult("添加成员team表操作成功");
+
+    }
+
+    @PostMapping("/removeMember")
+    public Result removeMember(int team_id) {
+        teamService.removeMember(team_id);
+        return ResultGenerator.genSuccessResult("删除成员team表操作成功");
+
+    }
+
+
+    @PostMapping("/detail")
+    public Result detail(@RequestParam Integer id) {
+        Team team = teamService.findById(id);
+        return ResultGenerator.genSuccessResult(team);
+    }
+
+
 
     @PostMapping("/delete")
     public Result delete(@RequestParam Integer id) {
@@ -40,11 +62,7 @@ public class TeamController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/detail")
-    public Result detail(@RequestParam Integer id) {
-        Team team = teamService.findById(id);
-        return ResultGenerator.genSuccessResult(team);
-    }
+
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {

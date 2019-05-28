@@ -10,23 +10,24 @@ public class Team {
     private String teamid;
 
     @Column(name = "team_name")
-    private String teamName;
+    private String team_name;
 
     @Column(name = "captainID")
     private String captainid;
 
     @Column(name = "member_num")
-    private String memberNum;
+    private int member_num;
 
     @Column(name = "create_date")
-    private Date createDate;
+    private Date create_date;
 
     private String avatar;
 
     private String introduction;
 
+    private int member_left;
     /**
-     * 以 | 分隔 
+     * 以 | 分隔
      */
     private String label;
 
@@ -47,15 +48,15 @@ public class Team {
     /**
      * @return team_name
      */
-    public String getTeamName() {
-        return teamName;
+    public String getTeam_name() {
+        return team_name;
     }
 
     /**
-     * @param teamName
+     * @param team_name
      */
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setTeam_name(String team_name) {
+        this.team_name = team_name;
     }
 
     /**
@@ -75,29 +76,29 @@ public class Team {
     /**
      * @return member_num
      */
-    public String getMemberNum() {
-        return memberNum;
+    public int getMember_Num() {
+        return member_num;
     }
 
     /**
-     * @param memberNum
+     * @param member_num
      */
-    public void setMemberNum(String memberNum) {
-        this.memberNum = memberNum;
+    public void setMember_Num(int member_num) {
+        this.member_num = member_num;
     }
 
     /**
      * @return create_date
      */
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreate_date() {
+        return create_date;
     }
 
     /**
-     * @param createDate
+     * @param create_date
      */
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
     }
 
     /**
@@ -121,13 +122,28 @@ public class Team {
         return introduction;
     }
 
+
+    /**
+     * @param member_left
+     */
+    public void setMember_left(int member_left) {
+        this.member_left = member_left;
+    }
+
+
+    /**
+     * @return member_left
+     */
+    public int getMember_left() {
+        return member_left;
+    }
+
     /**
      * @param introduction
      */
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
-
     /**
      * 获取以 | 分隔 
      *

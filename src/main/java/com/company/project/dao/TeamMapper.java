@@ -4,5 +4,7 @@ import com.company.project.core.Mapper;
 import com.company.project.model.Team;
 
 public interface TeamMapper extends Mapper<Team> {
-    public Team findById(String teamId);
+    Team findById(int teamId);
+    void updateById(Team team);
+    void insertTeam(Team team);
 }
