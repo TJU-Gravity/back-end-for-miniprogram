@@ -1,7 +1,11 @@
 package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.core.ServiceException;
+import com.company.project.model.Apply;
+import com.company.project.model.Team;
 import com.company.project.model.UserTeam;
+import com.company.project.service.ApplyService;
 import com.company.project.service.PostService;
 import com.company.project.service.TeamService;
 import com.company.project.service.UserTeamService;
@@ -11,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -25,6 +30,8 @@ public class UserTeamController {
     private TeamService teamService;
     @Resource
     private PostService postService;
+    @Resource
+    private ApplyService applyService;
 
     //!
     @PostMapping("/add")
@@ -32,7 +39,24 @@ public class UserTeamController {
         userTeamService.save(userTeam);
         teamService.addMember(userTeam.getTeamid());
 
+        //招募帖人数
         postService.addMember(userTeam.getTeamid(),1);
+
+        //申请记录
+        try {
+            Team team = teamService.findById(userTeam.getTeamid());
+            Apply apply = new Apply();
+            apply.setCaptainid(team.getCaptainid());
+            apply.setTeamid(team.getTeamid());
+            apply.setUsername(userTeam.getUsername());
+            apply.setState(BigDecimal.valueOf(1));
+            applyService.update(apply);
+        }
+        catch (Exception e)
+        {
+            throw new ServiceException(e.toString());
+        }
+
         return ResultGenerator.genSuccessResult();
     }
 
