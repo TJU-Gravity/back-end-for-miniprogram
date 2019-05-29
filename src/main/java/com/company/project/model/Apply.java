@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 @Table(name = "apply")
 public class Apply {
-    private BigDecimal state;
+
 
     private String username;
     @Column(name = "captainID")
@@ -13,6 +13,17 @@ public class Apply {
     @Id
     @Column(name = "teamID")
     private BigDecimal teamid;
+
+    @Transient
+    private String teamname;
+
+    public String getTeamname() {
+        return teamname;
+    }
+
+    public void setTeamname(String teamname) {
+        this.teamname = teamname;
+    }
 
     public BigDecimal getTeamid() {
         return teamid;
@@ -38,11 +49,5 @@ public class Apply {
         return captainid;
     }
 
-    public BigDecimal getState() {
-        return state;
-    }
 
-    public void setState(BigDecimal state) {
-        this.state = state;
-    }
 }

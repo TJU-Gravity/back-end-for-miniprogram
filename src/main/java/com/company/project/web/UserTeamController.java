@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,12 +46,11 @@ public class UserTeamController {
         //申请记录
         try {
             Team team = teamService.findById(userTeam.getTeamid());
-            Apply apply = new Apply();
-            apply.setCaptainid(team.getCaptainid());
-            apply.setTeamid(team.getTeamid());
-            apply.setUsername(userTeam.getUsername());
-            apply.setState(BigDecimal.valueOf(1));
-            applyService.update(apply);
+            List<String> usernames=new ArrayList<>();
+            usernames.add(team.getCaptainid());
+            usernames.add(userTeam.getUsername());
+            applyService.delete(usernames);
+
         }
         catch (Exception e)
         {

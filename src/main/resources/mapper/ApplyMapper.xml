@@ -9,7 +9,7 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="captainID" jdbcType="VARCHAR" property="captainid" />
     <result column="teamID" jdbcType="NUMERIC" property="teamid" />
-    <result column="state" jdbcType="NUMERIC" property="state" />
+
   </resultMap>
 
   <select id="check" resultType="com.company.project.model.Apply">
@@ -23,6 +23,18 @@
     </foreach>
 
   </select>
+
+  <delete id="deleteByUsernames" >
+    delete FROM apply  WHERE username in
+    <foreach item="username" collection="usernames" open="(" separator="," close=")">
+      #{username}
+    </foreach>
+    AND captainID in
+    <foreach item="username" collection="usernames" open="(" separator="," close=")">
+      #{username}
+    </foreach>
+
+  </delete>
 
 
 

@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,15 +24,29 @@ import java.util.List;
 public class ApplyController {
     @Resource
     private ApplyService applyService;
+    @Resource
+    private TeamService teamService;
 
     //!
     @PostMapping("/add")
     public Result add(@RequestBody Apply apply) {
+        List<String> usernames=new ArrayList<String>();
+        usernames.add(apply.getUsername());
+        usernames.add(apply.getCaptainid());
+        Apply hasApply=applyService.check(usernames);
+        if(hasApply!=null)
+            return ResultGenerator.genFailResult("双方有申请正在进行中");
         applyService.save(apply);
         return ResultGenerator.genSuccessResult();
     }
 
 
+    @PostMapping("/delete")
+    public Result delete(@RequestBody List<String> usernames) {
+
+        applyService.delete(usernames);
+        return ResultGenerator.genSuccessResult();
+    }
 
     @PostMapping("/update")
     public Result update(@RequestBody Apply apply) {
@@ -41,7 +56,12 @@ public class ApplyController {
 
     @PostMapping("/check")
     public Result detail(@RequestBody List<String> usernames) {
-        return ResultGenerator.genSuccessResult(applyService.check(usernames));
+        Apply apply=applyService.check(usernames);
+        if(apply!=null)
+        {
+            apply.setTeamname(teamService.findById(apply.getTeamid()).getTeam_name());
+        }
+        return ResultGenerator.genSuccessResult(apply);
     }
 
 

@@ -18,6 +18,12 @@ public class ApplyServiceImpl extends AbstractService<Apply> implements ApplySer
 
     @Override
     public Apply check(List<String> usernames) {
+
         return applyMapper.check(usernames);
+    }
+
+    @Override
+    public void delete(List<String> usernames) {
+        applyMapper.deleteByUsernames(usernames);
     }
 }

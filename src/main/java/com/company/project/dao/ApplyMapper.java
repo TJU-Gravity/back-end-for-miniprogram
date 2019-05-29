@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface ApplyMapper extends Mapper<Apply> {
      Apply check(@Param("usernames")List<String> usernames);
+     void deleteByUsernames(@Param("usernames")List<String> usernames);
 }
