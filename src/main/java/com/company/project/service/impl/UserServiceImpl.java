@@ -49,12 +49,6 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
         return user;
     }
-
-    @Override
-    public void deleteByUsername (String username) {
-        guserMapper.deleteByPrimaryKey(username);
-    }
-
     public void addUser(User u)
     {
         guserMapper.addUser(u);

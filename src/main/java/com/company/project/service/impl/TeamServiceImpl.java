@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * Created by CodeGenerator on 2019/05/09.
  */
-
 @Service
 @Transactional
 public class TeamServiceImpl extends AbstractService<Team> implements TeamService {
