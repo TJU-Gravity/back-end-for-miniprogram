@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface UserTeamMapper extends Mapper<UserTeam> {
-
+    UserTeam check(UserTeam userTeam);
     void deleteUserTeam(UserTeam userTeam);
     List<User> getMembers(BigDecimal teamid);
 }

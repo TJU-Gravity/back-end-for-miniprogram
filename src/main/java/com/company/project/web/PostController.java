@@ -50,10 +50,12 @@ public class PostController {
 
     @PostMapping("/add")
     public Result add(@RequestBody Post post) {
-        post.setPostingtime(new Timestamp(new Date().getTime()));
-        post.setLastpost(post.getPostingtime());
-        postService.save(post);
-        return ResultGenerator.genSuccessResult();
+
+            post.setPostingtime(new Timestamp(new Date().getTime()));
+            post.setLastpost(post.getPostingtime());
+            postService.save(post);
+            return ResultGenerator.genSuccessResult();
+
     }
 
     @PostMapping("/team/add")

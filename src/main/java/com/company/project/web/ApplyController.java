@@ -26,18 +26,27 @@ public class ApplyController {
     private ApplyService applyService;
     @Resource
     private TeamService teamService;
+    @Resource
+    private UserTeamService userTeamService;
 
     //!
     @PostMapping("/add")
     public Result add(@RequestBody Apply apply) {
-        List<String> usernames=new ArrayList<String>();
-        usernames.add(apply.getUsername());
-        usernames.add(apply.getCaptainid());
-        Apply hasApply=applyService.check(usernames);
-        if(hasApply!=null)
-            return ResultGenerator.genFailResult("双方有申请正在进行中");
-        applyService.save(apply);
-        return ResultGenerator.genSuccessResult();
+
+        if(userTeamService.check(apply.getTeamid(),apply.getUsername())==null) {
+            List<String> usernames = new ArrayList<>();
+
+            usernames.add(apply.getUsername());
+            usernames.add(apply.getCaptainid());
+
+            Apply hasApply = applyService.check(usernames);
+            if (hasApply != null)
+                return ResultGenerator.genFailResult("双方有申请正在进行中");
+            applyService.save(apply);
+            return ResultGenerator.genSuccessResult();
+        }
+        else
+            return ResultGenerator.genFailResult("已经在队伍中");
     }
 
 

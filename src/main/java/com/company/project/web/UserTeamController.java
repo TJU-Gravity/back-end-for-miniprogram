@@ -1,5 +1,6 @@
 package com.company.project.web;
 import com.company.project.core.Result;
+import com.company.project.core.ResultCode;
 import com.company.project.core.ResultGenerator;
 import com.company.project.core.ServiceException;
 import com.company.project.model.Apply;
@@ -37,25 +38,36 @@ public class UserTeamController {
     //!
     @PostMapping("/add")
     public Result add(@RequestBody UserTeam userTeam) {
-        userTeamService.save(userTeam);
-        teamService.addMember(userTeam.getTeamid());
 
-        //招募帖人数
-        postService.addMember(userTeam.getTeamid(),1);
-
-        //申请记录
         try {
+            //删除apply
             Team team = teamService.findById(userTeam.getTeamid());
-            List<String> usernames=new ArrayList<>();
-            usernames.add(team.getCaptainid());
-            usernames.add(userTeam.getUsername());
-            applyService.delete(usernames);
+            applyService.deleteApplyByTeam(team,userTeam.getUsername());
 
         }
         catch (Exception e)
         {
-            throw new ServiceException(e.toString());
+            throw new ServiceException("申请可能不存在，未执行加入团队请求");
         }
+        try {
+            userTeamService.save(userTeam);
+        }
+        catch (Exception e)
+        {
+            throw new ServiceException("已在队伍中");
+        }
+
+
+        teamService.addMember(userTeam.getTeamid());
+        //招募帖人数
+        if(!postService.addMember(userTeam.getTeamid(), 1))
+        {
+            return new Result()
+                    .setCode(ResultCode.SUCCESS)
+                    .setMessage("添加成功，但是注意招募人数已经大于原定计划");
+        }
+
+
 
         return ResultGenerator.genSuccessResult();
     }

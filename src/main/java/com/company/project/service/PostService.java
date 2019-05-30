@@ -15,7 +15,7 @@ import java.util.List;
 public interface PostService extends Service<Post> {
     List<PostResult> getList(MyRequestBody myRequestBody);
     List<PostResult> getMyList(MyRequestBody myRequestBody);
-    void addMember(BigDecimal teamID,int member);
+    boolean addMember(BigDecimal teamID,int member);
 
 
 }

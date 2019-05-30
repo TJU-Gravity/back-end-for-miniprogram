@@ -35,6 +35,17 @@ public class UserTeamServiceImpl extends AbstractService<UserTeam> implements Us
         userTeamMapper.deleteUserTeam(userTeam);
 
 
-    };
+    }
+
+    @Override
+    public UserTeam check(BigDecimal teamid, String username) {
+        UserTeam userTeam=new UserTeam();
+        userTeam.setTeamid(teamid);
+        userTeam.setUsername(username);
+
+        return  userTeamMapper.check(userTeam );
+    }
+
+    ;
 
 }

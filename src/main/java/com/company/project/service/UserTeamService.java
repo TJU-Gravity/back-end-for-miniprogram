@@ -13,4 +13,5 @@ import java.util.List;
 public interface UserTeamService extends Service<UserTeam> {
     List<User> getMembers(BigDecimal teamid);
     void removeUserFromTeam(UserTeam userTeam);
+    UserTeam check(BigDecimal teamid,String username);
 }

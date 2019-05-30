@@ -20,4 +20,8 @@
     select u.username,u.nickname,u.headshot from  user_team  as t join  guser as u on (t.username=u.username) where t.teamID=#{teamid};
   </select>
 
+  <select id="check" parameterType="com.company.project.model.UserTeam" resultType="com.company.project.model.UserTeam">
+    select * from  user_team   where teamID=#{teamid} and username=#{username};
+  </select>
+
 </mapper>
