@@ -45,16 +45,17 @@ public class UserTeamController {
             applyService.deleteApplyByTeam(team,userTeam.getUsername());
 
         }
-        catch (Exception e) {
-            return ResultGenerator.genFailResult("申请可能不存在，未执行加入团队请求");
+        catch (Exception e)
+        {
+            throw new ServiceException("申请可能不存在，未执行加入团队请求");
         }
-            try {
-                userTeamService.save(userTeam);
-            } catch (Exception ex) {
-                return ResultGenerator.genFailResult("已在队伍中");
-            }
-
-
+        try {
+            userTeamService.save(userTeam);
+        }
+        catch (Exception e)
+        {
+            throw new ServiceException("已在队伍中");
+        }
 
 
         teamService.addMember(userTeam.getTeamid());
