@@ -10,9 +10,12 @@ import com.company.project.service.ApplyService;
 import com.company.project.service.PostService;
 import com.company.project.service.TeamService;
 import com.company.project.service.UserTeamService;
+import com.company.project.service.impl.UserTagsServiceImpl;
 import com.company.project.web.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,10 +37,11 @@ public class UserTeamController {
     private PostService postService;
     @Resource
     private ApplyService applyService;
-
+    private final Logger logger = LoggerFactory.getLogger(UserTeamController.class);
     //!
     @PostMapping("/add")
     public Result add(@RequestBody UserTeam userTeam) {
+
 
         try {
             //删除apply
@@ -47,14 +51,15 @@ public class UserTeamController {
         }
         catch (Exception e)
         {
-            throw new ServiceException("申请可能不存在，未执行加入团队请求");
+            throw new ServiceException("团队不存在");
+            //return ResultGenerator.genFailResult("团队不存在或者申请不存在，未执行加入团队请求");
         }
         try {
             userTeamService.save(userTeam);
         }
         catch (Exception e)
         {
-            throw new ServiceException("已在队伍中");
+            return ResultGenerator.genFailResult("已在队伍中");
         }
 
 
