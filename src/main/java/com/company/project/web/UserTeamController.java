@@ -42,25 +42,22 @@ public class UserTeamController {
     @PostMapping("/add")
     public Result add(@RequestBody UserTeam userTeam) {
 
-
         try {
             //删除apply
             Team team = teamService.findById(userTeam.getTeamid());
             applyService.deleteApplyByTeam(team,userTeam.getUsername());
 
         }
-        catch (Exception e)
-        {
-            throw new ServiceException("团队不存在");
-            //return ResultGenerator.genFailResult("团队不存在或者申请不存在，未执行加入团队请求");
+        catch (Exception e) {
+            return ResultGenerator.genFailResult("团队不存在");
         }
         try {
             userTeamService.save(userTeam);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception ex) {
             return ResultGenerator.genFailResult("已在队伍中");
         }
+
+
 
 
         teamService.addMember(userTeam.getTeamid());

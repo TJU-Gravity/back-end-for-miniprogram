@@ -30,7 +30,7 @@ public class BeforeUserTeamControllerTest {
         initApplication();
         initUserTeam();
         initPosts();
-        System.out.print("?");
+
     }
 
 
@@ -121,7 +121,7 @@ public class BeforeUserTeamControllerTest {
 
         }
 
-        for(int i=0;i!=5;i++)
+        for(int i=0;i!=4;i++)
         {
 
             Team team=teamFactory("team"+i,"B");
@@ -136,7 +136,7 @@ public class BeforeUserTeamControllerTest {
     {
 
         List<Apply> applications=new ArrayList<>();
-        for(int i=1; i!=5 ;i++)
+        for(int i=0; i!=4 ;i++)
         {
             while( teamIds.get(i)==null)
             {
@@ -148,12 +148,12 @@ public class BeforeUserTeamControllerTest {
     }
     private  void initUserTeam()
     {
-        while( teamIds.get(1)==null)
+        while( teamIds.get(0)==null)
         {
 
         }
-        userTeamService.save(teamUserFactory("A",teamIds.get(1)));
-        for(int i=0; i!=5 ;i++)
+        userTeamService.save(teamUserFactory("A",teamIds.get(0)));
+        for(int i=0; i!=4 ;i++)
         {
             while( teamIds.get(i)==null)
             {
@@ -164,13 +164,13 @@ public class BeforeUserTeamControllerTest {
     }
     private  void initPosts()
     {
-        while( teamIds.get(3)==null||teamIds.get(4)==null)
+        while( teamIds.get(2)==null||teamIds.get(3)==null)
         {
 
         }
 
-        postService.save(postFactory(teamIds.get(3),BigDecimal.valueOf(0)));
-        postService.save(postFactory(teamIds.get(4),BigDecimal.valueOf(1)));
+        postService.save(postFactory(teamIds.get(2),BigDecimal.valueOf(0)));
+        postService.save(postFactory(teamIds.get(3),BigDecimal.valueOf(1)));
 
     }
 

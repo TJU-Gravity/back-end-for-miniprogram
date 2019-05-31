@@ -35,6 +35,9 @@ import static org.junit.Assert.*;
 public class UserTeamControllerTestJunit4 {
 
     @Resource
+    private TeamService teamService;
+
+    @Resource
     private UserTeamController controller;
     @Resource
     private TeamMapper teamMapper;
@@ -48,12 +51,22 @@ public class UserTeamControllerTestJunit4 {
 
         List<Team> teams=teamMapper.getMyList("B");
 
+         BigDecimal nonExistentTeamId=teams.get(0).getTeamid().add(BigDecimal.valueOf(5));
+
+        assertNull(teamService.findById(nonExistentTeamId));
+        Result result=controller.add(teamUserFactory("A",nonExistentTeamId));
+
+        System.out.print("\n");
+        System.out.print("Nonexistent team");
+        System.out.print(result.toString());
+        System.out.print("\n");
         for(Team team:teams)
         {
-           Result result=controller.add(teamUserFactory("A",team.getTeamid()));
-            System.out.print("\n");
+           result=controller.add(teamUserFactory("A",team.getTeamid()));
+           System.out.print("\n");
            System.out.print(team.getTeam_name());
            System.out.print(result.toString());
+            System.out.print("\n");
         }
 
     }
