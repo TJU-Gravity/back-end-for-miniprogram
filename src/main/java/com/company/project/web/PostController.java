@@ -2,6 +2,7 @@ package com.company.project.web;
 
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.core.ServiceException;
 import com.company.project.model.Reply;
 import com.company.project.model.Team;
 import com.company.project.model.UserTeam;
@@ -50,11 +51,53 @@ public class PostController {
 
     @PostMapping("/add")
     public Result add(@RequestBody Post post) {
+        try{
+            assert(post.getPosttype().equals("1")||post.getPosttype().equals("2"));
+            assert (post.getPostbody()!=null);
+            assert(post.getTitle()!=null&&post.getTitle().length()<=50);
+        }
+        catch (Exception e)
+        {
+            throw new ServiceException("参数不符合要求");
+        }
+        if(post.getPosttype().equals("1"))
+        {
+            try {
+                assert (post.team != null);
+                assert (post.team.getTeam_name().length()<=15);
+                assert (post.getState()!=null&&(post.getState().compareTo(BigDecimal.valueOf(0))>=1));
+            }
+            catch (Exception e)
+            {
+                throw new ServiceException("参数不符合要求");
+            }
+            logger.warn(post.team.getTeam_name());
+            post.team.setMember_Num(1);
+            post.team.setCreate_date(new Date());
+            teamService.add(post.team);
 
+            UserTeam userTeam=new UserTeam();
+            userTeam.setTeamid(post.team.getTeamid());
+            userTeam.setUsername(post.team.getCaptainid());
+            userTeamService.save(userTeam);
+
+
+            post.setPostingtime(new Timestamp(new Date().getTime()));
+            post.setLastpost(post.getPostingtime());
+            post.setTeamid(post.team.getTeamid());
+            postService.save(post);
+
+            postService.addMember(post.team.getTeamid(),1);
+            return ResultGenerator.genSuccessResult();
+        }
+        else
+        {
             post.setPostingtime(new Timestamp(new Date().getTime()));
             post.setLastpost(post.getPostingtime());
             postService.save(post);
             return ResultGenerator.genSuccessResult();
+        }
+
 
     }
 
