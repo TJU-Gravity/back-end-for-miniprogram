@@ -34,15 +34,12 @@ public class UserTeamControllerTestJunit4 {
 
     @Resource
     private TeamService teamService;
-
     @Resource
     private UserTeamController controller;
     @Resource
     private TeamMapper teamMapper;
-
     @Resource
     private PostService postService;
-
     @Resource
     private UserService userService;
     @Resource
@@ -50,22 +47,28 @@ public class UserTeamControllerTestJunit4 {
     @Resource
     private UserTeamService userTeamService;
 
-
     private ArrayList<BigDecimal> teamIds=new ArrayList<BigDecimal>();
-
-
 
     private final Logger logger = LoggerFactory.getLogger(UserTeamControllerTestJunit4.class);
 
     @Before
     public void init()
     {
+
         initUser("A");
         initUser("B");
-        initTeams();
-        initApplication();
-        initUserTeam();
-        initPosts();
+
+        for(int i=0;i!=4;i++) {
+            synchronized (this) {
+                teamIds.add(initTeam("team" + i, "B"));
+            }
+            initApplication("A", teamIds.get(i), "B");
+            initUserTeam("B",teamIds.get(i));
+        }
+        initUserTeam("A",teamIds.get(0));
+
+        initPosts(teamIds.get(2),0);
+        initPosts(teamIds.get(3),1);
 
     }
 
@@ -96,7 +99,13 @@ public class UserTeamControllerTestJunit4 {
 
     }
 
-
+    private UserTeam teamUserFactory(String username, BigDecimal teamId)
+    {
+        UserTeam userTeam=new UserTeam();
+        userTeam.setUsername(username);
+        userTeam.setTeamid(teamId);
+        return userTeam;
+    }
 
 
     private Post postFactory(BigDecimal teamId, BigDecimal state)
@@ -112,6 +121,7 @@ public class UserTeamControllerTestJunit4 {
         post.setPostbody("body");
         return post;
     }
+
     private Apply applicationFactory(String username, BigDecimal teamId, String captainId)
     {
         if (teamId==null) throw new RuntimeException();
@@ -121,23 +131,22 @@ public class UserTeamControllerTestJunit4 {
         apply.setUsername(username);
         return apply;
     }
+
     private Team teamFactory(String teamName, String captainId)
     {
         Team team=new Team();
         team.setTeam_name(teamName);
-
         team.setCaptainid(captainId);
         team.setCreate_date(new Date());
         team.setMember_Num(1);
-
         return team;
     }
+
     private User userFactory(String username)
     {
         User user=new User();
         user.setUsername(username);
         user.setNickname(username);
-
         return user;
     }
 
@@ -150,61 +159,32 @@ public class UserTeamControllerTestJunit4 {
         synchronized (this) {
             User A = userFactory(username);
             userService.save(A);
-
-        }
-    }
-    private  void initTeams()
-    {
-        synchronized (this) {
-            for (int i = 0; i != 4; i++) {
-                Team team = teamFactory("team" + i, "B");
-                teamService.add(team);
-                teamIds.add(team.getTeamid());
-
-            }
-        }
-
-    }
-
-    private  void initApplication()
-    {
-
-        synchronized (this) {
-            List<Apply> applications = new ArrayList<>();
-            for (int i = 0; i != 4; i++) {
-
-                applyService.save(applicationFactory("A", teamIds.get(i), "B"));
-            }
-        }
-    }
-    private  void initUserTeam()
-    {
-        synchronized (this) {
-            userTeamService.save(teamUserFactory("A", teamIds.get(0)));
-            for (int i = 0; i != 4; i++) {
-
-                userTeamService.save(teamUserFactory("B", teamIds.get(i)));
-            }
-        }
-    }
-    private  void initPosts()
-    {
-        synchronized (this) {
-
-            postService.save(postFactory(teamIds.get(2),BigDecimal.valueOf(0)));
-            postService.save(postFactory(teamIds.get(3),BigDecimal.valueOf(1)));
         }
     }
 
-
-
-    private UserTeam teamUserFactory(String username, BigDecimal teamId)
+    private BigDecimal initTeam(String teamname,String capainId)
     {
-        UserTeam userTeam=new UserTeam();
-        userTeam.setUsername(username);
-        userTeam.setTeamid(teamId);
-        return userTeam;
+        Team team = teamFactory(teamname, capainId);
+        teamService.add(team);
+        return team.getTeamid();
     }
+
+    private  void initApplication(String username,BigDecimal teamId,String captainId)
+    {
+        applyService.save(applicationFactory(username,teamId,captainId));
+    }
+    private  void initUserTeam(String username,BigDecimal teamId)
+    {
+        userTeamService.save(teamUserFactory(username,teamId));
+    }
+    private  void initPosts(BigDecimal teamId,int state)
+    {
+        postService.save(postFactory(teamId,BigDecimal.valueOf(state)));
+    }
+
+
+
+
 
 
 }
