@@ -26,6 +26,8 @@
   </select>
 
   <select id="findPostByTeamID" parameterType="BigDecimal"  resultType="com.company.project.model.Post">
-    select* from post  where teamid=#{teamid}
+    select * from post  where teamid=#{teamid}
   </select>
+
+
 </mapper>

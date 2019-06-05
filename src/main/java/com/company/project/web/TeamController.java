@@ -55,7 +55,7 @@ public class TeamController {
 //?
     @PostMapping("/detail")
     public Result detail(@RequestBody MyRequestBody body) {
-        Team team = teamService.findById(body.ID);
+        Team team = teamService.getDetail(body.ID);
         team.setMembers(userTeamService.getMembers(body.ID));
         return ResultGenerator.genSuccessResult(team);
     }

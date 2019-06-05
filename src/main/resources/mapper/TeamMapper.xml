@@ -28,4 +28,9 @@
     select * from team as t join user_team as u on t.teamid=u.teamid where u.username=#{username}
   </select>
 
+  <select id="getDetail" parameterType="com.company.project.model.Team">
+    select t.teamID,t.team_name,t.captainID,t.member_num,t.create_date,t.avatar,t.introduction,t.label,p.POSTID as post.postid,p.title as post.title from team as t join post as p on (t.teamid=p.teamid)where t.teamID=#{teamid}
+
+  </select>
+
 </mapper>

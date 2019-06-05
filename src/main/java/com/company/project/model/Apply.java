@@ -10,12 +10,24 @@ public class Apply {
     private String username;
     @Column(name = "captainID")
     private String captainid;
+
     @Id
     @Column(name = "teamID")
     private BigDecimal teamid;
 
+    @Column(name = "type")
+    private int type;
+
     @Transient
     private String teamname;
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
 
     public String getTeamname() {
         return teamname;

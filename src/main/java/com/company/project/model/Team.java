@@ -1,5 +1,7 @@
 package com.company.project.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Transient;
@@ -22,6 +24,8 @@ public class Team {
     @Column(name = "member_num")
     private int member_num;
 
+
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     @Column(name = "create_date")
     private Date create_date;
 
@@ -31,9 +35,16 @@ public class Team {
 
     @Transient
     private List<User> members;
+    @Transient
+    private Post post;
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
-
+    public Post getPost() {
+        return post;
+    }
 
     public List<User> getMembers() {
         return members;

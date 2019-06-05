@@ -9,6 +9,7 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="captainID" jdbcType="VARCHAR" property="captainid" />
     <result column="teamID" jdbcType="NUMERIC" property="teamid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
 
   </resultMap>
 

@@ -54,7 +54,6 @@ public class UserTeamControllerTestJunit4 {
     @Before
     public void init()
     {
-
         initUser("A");
         initUser("B");
 
