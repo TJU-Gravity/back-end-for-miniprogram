@@ -10,6 +10,8 @@ import com.company.project.service.UserTeamService;
 import com.company.project.web.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -28,11 +30,13 @@ public class ApplyController {
     private TeamService teamService;
     @Resource
     private UserTeamService userTeamService;
+    private final Logger logger = LoggerFactory.getLogger(ApplyController.class);
 
     //!
     @PostMapping("/add")
     public Result add(@RequestBody Apply apply) {
 
+        logger.warn(new Integer(apply.getType()).toString());
         if(userTeamService.check(apply.getTeamid(),apply.getUsername())==null) {
             List<String> usernames = new ArrayList<>();
 
