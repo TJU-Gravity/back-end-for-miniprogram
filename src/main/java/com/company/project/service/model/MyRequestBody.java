@@ -1,6 +1,6 @@
-package com.company.project.web.model;
+package com.company.project.service.model;
 
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 
 public class MyRequestBody {
@@ -8,8 +8,9 @@ public class MyRequestBody {
     public Integer page=0;
     public Integer size=0;
     public String username="";
-    public BigDecimal ID;
-    public BigDecimal state;
+    public String me = "";
+    public Integer ID;
+    public Integer state;
 
     public ArrayList<String> tags=new ArrayList<>();
 

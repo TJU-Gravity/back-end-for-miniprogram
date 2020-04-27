@@ -4,17 +4,17 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.math.BigDecimal;
+
 import java.sql.Timestamp;
 import javax.persistence.*;
 
 public class Reply {
     @Id
     @Column(name = "replyID")
-    private BigDecimal replyid;
+    private Integer replyid;
 
     @Column(name = "postID")
-    private BigDecimal postid;
+    private Integer postid;
 
     @Column(name = "posterID")
     private String posterid;
@@ -26,32 +26,35 @@ public class Reply {
     @Column(name = "replyBody")
     private String replybody;
 
+    @Column(name = "quote")
+    private Integer quote;
+
 
     /**
      * @return replyID
      */
-    public BigDecimal getReplyid() {
+    public Integer getReplyid() {
         return replyid;
     }
 
     /**
      * @param replyid
      */
-    public void setReplyid(BigDecimal replyid) {
+    public void setReplyid(Integer replyid) {
         this.replyid = replyid;
     }
 
     /**
      * @return postID
      */
-    public BigDecimal getPostid() {
+    public Integer getPostid() {
         return postid;
     }
 
     /**
      * @param postid
      */
-    public void setPostid(BigDecimal postid) {
+    public void setPostid(Integer postid) {
         this.postid = postid;
     }
 

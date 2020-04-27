@@ -3,7 +3,6 @@ package com.company.project.service.impl;
 import com.company.project.core.ProjectConstant;
 import com.company.project.core.ServiceException;
 import com.company.project.dao.UserMapper;
-import com.company.project.model.Team;
 import com.company.project.model.User;
 import com.tls.tls_sigature.tls_sigature;
 import com.tls.tls_sigature.tls_sigature.GenTLSSignatureResult;
@@ -31,8 +30,7 @@ public class TIM {
     @Resource
     private UserMapper guserMapper;
 
-    @Resource
-    private TeamServiceImpl teamService;
+
 
 
 
@@ -86,16 +84,7 @@ public class TIM {
      * @param teamId
      * @return
      */
-    public String contactTeamCaptain(String teamId,String openid){
-        Team t=teamService.findById(teamId);
 
-        //查找所属队伍关系??
-
-        //如果不所属？
-        //加队长
-        String toAccount=t.getCaptainid();
-        return addFriend(openid,toAccount,"weixin");
-    }
 
     /**
      * 双向加好友。

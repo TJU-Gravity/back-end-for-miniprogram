@@ -4,7 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.math.BigDecimal;
+
 
 import java.sql.Timestamp;
 import javax.persistence.*;
@@ -12,14 +12,14 @@ import javax.persistence.*;
 public class Post {
     @Id
     @Column(name = "postID")
-    private BigDecimal postid;
+    private Integer postid;
 
     private String posttype;
 
     @Column(name = "posterID")
     private String posterid;
 
-    private BigDecimal state;
+    private Integer state;
 
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     @Column(name = "postingTime")
@@ -27,7 +27,7 @@ public class Post {
 
     private String title;
 
-    private BigDecimal hits;
+    private Integer hits;
 
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     @Column(name = "lastPost")
@@ -38,33 +38,24 @@ public class Post {
 
 
 
-    @Column(name = "teamID")
-    private BigDecimal teamid;
 
 
-    @Transient
-    public Team team;
 
-    public BigDecimal getTeamid() {
-        return teamid;
-    }
 
-    public void setTeamid(BigDecimal teamid) {
-        this.teamid = teamid;
-    }
+
 
     /**
      * @return postID
      */
 
-    public BigDecimal getPostid() {
+    public Integer getPostid() {
         return postid;
     }
 
     /**
      * @param postid
      */
-    public void setPostid(BigDecimal postid) {
+    public void setPostid(Integer postid) {
         this.postid = postid;
     }
 
@@ -99,14 +90,14 @@ public class Post {
     /**
      * @return state
      */
-    public BigDecimal getState() {
+    public Integer getState() {
         return state;
     }
 
     /**
      * @param state
      */
-    public void setState(BigDecimal state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -143,14 +134,14 @@ public class Post {
     /**
      * @return hits
      */
-    public BigDecimal getHits() {
+    public Integer getHits() {
         return hits;
     }
 
     /**
      * @param hits
      */
-    public void setHits(BigDecimal hits) {
+    public void setHits(Integer hits) {
         this.hits = hits;
     }
 

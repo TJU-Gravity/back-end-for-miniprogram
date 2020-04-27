@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Table(name = "guser")
 public class User {
     @Id
+    private Integer id;
+
     private String username;
 
     private String nickname;
@@ -31,23 +32,39 @@ public class User {
     private String introduction;
 
     @Column(name = "userPrivileges")
-    private BigDecimal userprivileges;
+    private Integer userprivileges;
 
     private String email;
 
-    private BigDecimal status;
+    private Integer status;
 
+    private String tags;
 
+    @Column(name = "unread_apply")
+    private Integer unreadApply;
 
-    @Transient
-    private List<String> tags;
+    private String wechat;
+    private String qq;
+    private String privacy;
+
     @Transient
     private String code;
+
+    @Transient
+    private int relationship;
 
     @JSONField(format="yyyy-MM-dd")
     private Date expire_time;
     private String user_sig;
 
+
+    public int getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(int relationship) {
+        this.relationship = relationship;
+    }
 
     public Date getExpire_time() {
         return expire_time;
@@ -73,13 +90,16 @@ public class User {
         this.code = code;
     }
 
-    public List<String> getTags() {
+
+
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
+
     private String openid;
 
 
@@ -198,14 +218,14 @@ public class User {
     /**
      * @return userPrivileges
      */
-    public BigDecimal getUserprivileges() {
+    public Integer getUserprivileges() {
         return userprivileges;
     }
 
     /**
      * @param userprivileges
      */
-    public void setUserprivileges(BigDecimal userprivileges) {
+    public void setUserprivileges(Integer userprivileges) {
         this.userprivileges = userprivileges;
     }
 
@@ -226,19 +246,39 @@ public class User {
     /**
      * @return status
      */
-    public BigDecimal getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
     /**
      * @param status
      */
-    public void setStatus(BigDecimal status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
 
+    public String getPrivacy() {
+        return privacy;
+    }
 
+    public void setPrivacy(String privacy) {
+        this.privacy = privacy;
+    }
 
+    public String getQq() {
+        return qq;
+    }
 
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
 }

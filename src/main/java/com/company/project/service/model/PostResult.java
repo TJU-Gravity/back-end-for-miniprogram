@@ -1,13 +1,13 @@
-package com.company.project.web.model;
+package com.company.project.service.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-import java.math.BigDecimal;
+
 import java.sql.Timestamp;
 
 public class PostResult {
 
-        public BigDecimal postid;
+        public Integer postid;
 
 
         public String posttype;
@@ -16,10 +16,9 @@ public class PostResult {
         public String posterid;
 
 
-        public BigDecimal teamid;
 
         public String headshot;
-        public BigDecimal state;
+        public Integer state;
 
         @JSONField(format="yyyy-MM-dd HH:mm:ss")
         public Timestamp postingtime;
@@ -27,7 +26,7 @@ public class PostResult {
         public String title;
 
 
-        public BigDecimal hits;
+        public Integer hits;
 
         @JSONField(format="yyyy-MM-dd HH:mm:ss")
         public Timestamp lastpost;

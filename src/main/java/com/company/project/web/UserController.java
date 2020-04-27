@@ -1,15 +1,17 @@
 package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
+import com.company.project.model.Apply;
 import com.company.project.model.User;
+import com.company.project.service.ApplyService;
 import com.company.project.service.UserService;
-import com.company.project.service.UserTagsService;
-import com.company.project.web.model.MyRequestBody;
+import com.company.project.service.model.MyRequestBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +22,9 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
-@Resource
-private UserTagsService userTagsService;
+
+    @Resource
+    private ApplyService applyService;
     //NEW！
     @PostMapping("/loginWeChat")
     public Result loginWeChat(@RequestBody User u) {
@@ -38,6 +41,7 @@ private UserTagsService userTagsService;
 
     @PostMapping("/add")
     public Result add(User user) {
+        //需要处理：已经存在关系的情况下在申请？
         userService.save(user);
         return ResultGenerator.genSuccessResult();
     }
@@ -60,6 +64,19 @@ private UserTagsService userTagsService;
     @PostMapping("/detail")
     public Result detail(@RequestBody MyRequestBody myRequestBody) {
         User user = userService.findByUsername(myRequestBody.username);
+        List<String> usernames =new ArrayList<String>();
+        usernames.add(myRequestBody.username);
+        usernames.add(myRequestBody.me);
+        Apply apply = applyService.check(usernames);
+        int relationship = 0;
+        if (apply != null) {
+            if (apply.getStatus().equals(1))
+                relationship = 3;
+            else if (apply.getApplicant() == myRequestBody.me)
+                relationship = 1;
+            else relationship = 2;
+        }
+        user.setRelationship(relationship);
         return ResultGenerator.genSuccessResult(user);
     }
 

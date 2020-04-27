@@ -10,7 +10,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +50,7 @@ public class ReplyController {
 
     @PostMapping("/detail")
     public Result detail(@RequestParam Integer id) {
-        Reply reply = replyService.findById(new BigDecimal(id));
+        Reply reply = replyService.findById(new Integer(id));
         return ResultGenerator.genSuccessResult(reply);
     }
 

@@ -6,38 +6,31 @@
       WARNING - @mbg.generated
     -->
 
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="captainID" jdbcType="VARCHAR" property="captainid" />
-    <result column="teamID" jdbcType="NUMERIC" property="teamid" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="applicant" jdbcType="VARCHAR" property="applicant" />
+    <result column="accepter" jdbcType="VARCHAR" property="accepter" />
+    <result column="id" jdbcType="NUMERIC" property="id" />
+    <result column="status" jdbcType="INTEGER" property="status" />
 
   </resultMap>
 
-  <select id="check" resultType="com.company.project.model.Apply">
-    SELECT * FROM apply  WHERE username in
-    <foreach item="username" collection="usernames" open="(" separator="," close=")">
-    #{username}
-  </foreach>
-  AND captainID in
-    <foreach item="username" collection="usernames" open="(" separator="," close=")">
-      #{username}
-    </foreach>
-
+  <select id="getMyList" resultType="com.company.project.model.Apply">
+    SELECT * FROM
+    (SELECT headshot as accepter_headshot,nickname as accepter_nickname,applicant,accepter,id,status FROM apply as a join guser as u on (u.username=a.accepter) WHERE applicant = #{username} ORDER BY id)
+    UNION
+    (SELECT headshot as applicant_headshot,nickname as applicant_nickname,applicant,accepter,id,status FROM apply as a join guser as u on (u.username=a.applicant) WHERE accepter = #{username} ORDER BY id)
   </select>
 
-  <delete id="deleteByUsernames" >
-    delete FROM apply  WHERE username in
-    <foreach item="username" collection="usernames" open="(" separator="," close=")">
-      #{username}
-    </foreach>
-    AND captainID in
-    <foreach item="username" collection="usernames" open="(" separator="," close=")">
-      #{username}
-    </foreach>
 
-  </delete>
-
-
+  <select id="check" resultType="com.company.project.model.Apply">
+  SELECT * FROM apply  WHERE accepter in
+  <foreach item="username" collection="usernames" open="(" separator="," close=")">
+    #{username}
+  </foreach>
+  AND applicant in
+  <foreach item="username" collection="usernames" open="(" separator="," close=")">
+    #{username}
+  </foreach>
+  </select>
 
 
 </mapper>

@@ -10,10 +10,13 @@
     <result column="POSTERID" jdbcType="VARCHAR" property="posterid" />
     <result column="POSTINGTIME" jdbcType="TIMESTAMP" property="postingtime" />
     <result column="REPLYBODY" jdbcType="CLOB" property="replybody" />
+    <result column="quote" jdbcType="NUMERIC" property="quote" />
   </resultMap>
 
-  <select id="getReplys" parameterType="BigDecimal" resultType="com.company.project.web.model.ReplyResult">
-    select replyid,postid,posterid,postingtime,replybody,nickname,headshot from  reply  as r join  guser as u on (r.posterid=u.username) where postID=#{postid};
+  <select id="getReplys" parameterType="Integer" resultType="com.company.project.service.model.ReplyResult">
+    select replyid,postid,posterid,postingtime,replybody,nickname,headshot,quote from  reply  as r join  guser as u on (r.posterid=u.username) where postID=#{postid};
   </select>
-
+  <select id="getReply" parameterType="Integer" resultType="com.company.project.service.model.ReplyResult">
+    select replyid,postid,posterid,postingtime,replybody,nickname,headshot,quote from  reply  as r join  guser as u on (r.posterid=u.username) where replyID=#{replyid};
+  </select>
 </mapper>

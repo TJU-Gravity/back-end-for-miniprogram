@@ -1,15 +1,14 @@
-package com.company.project.web.model;
+package com.company.project.service.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-import java.math.BigDecimal;
+
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class ReplyResult {
-    public BigDecimal replyid;
+    public Integer replyid;
 
-    public BigDecimal postid;
+    public Integer postid;
 
     public String posterid;
 
@@ -23,5 +22,9 @@ public class ReplyResult {
     public String nickname;
 
     public String headshot;
+
+    public Integer quote;
+
+    public ReplyResult quotebody;
 
 }

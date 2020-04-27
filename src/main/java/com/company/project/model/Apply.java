@@ -1,65 +1,53 @@
 package com.company.project.model;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+
 
 @Table(name = "apply")
 public class Apply {
 
 
-    private String username;
-    @Column(name = "captainID")
-    private String captainid;
+    private String applicant;
+
+    private String accepter;
 
     @Id
-    @Column(name = "teamID")
-    private BigDecimal teamid;
+    @Column(name = "id")
+    private Integer id;
 
-    @Column(name = "type")
-    private int type;
+    @Column(name = "status")
+    private Integer status;
 
-    @Transient
-    private String teamname;
 
-    public void setType(int type) {
-        this.type = type;
+    public void setAccepter(String accepter) {
+        this.accepter = accepter;
     }
 
-    public int getType() {
-        return type;
+    public String getAccepter() {
+        return accepter;
     }
 
-    public String getTeamname() {
-        return teamname;
+    public void setApplicant(String applicant) {
+        this.applicant = applicant;
     }
 
-    public void setTeamname(String teamname) {
-        this.teamname = teamname;
+    public String getApplicant() {
+        return applicant;
     }
 
-    public BigDecimal getTeamid() {
-        return teamid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setTeamid(BigDecimal teamid) {
-        this.teamid = teamid;
+    public Integer getId() {
+        return id;
     }
 
-    public String getUsername() {
-        return username;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public Integer getStatus() {
+        return status;
     }
-
-    public void setCaptainid(String captainid) {
-        this.captainid = captainid;
-    }
-
-    public String getCaptainid() {
-        return captainid;
-    }
-
-
 }

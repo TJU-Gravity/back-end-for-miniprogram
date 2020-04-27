@@ -7,7 +7,7 @@ import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.math.BigDecimal;
+
 import java.util.List;
 
 /**
@@ -33,9 +33,7 @@ public abstract class AbstractService<T> implements Service<T> {
         mapper.insertList(models);
     }
 
-    public void deleteById(BigDecimal id) {
-        mapper.deleteByPrimaryKey(id);
-    }
+
 
     public void deleteById(Integer id) {
         mapper.deleteByPrimaryKey(id);
@@ -48,10 +46,8 @@ public abstract class AbstractService<T> implements Service<T> {
         mapper.updateByPrimaryKeySelective(model);
     }
 
+
     public T findById(Integer id) {
-        return mapper.selectByPrimaryKey(id);
-    }
-    public T findById(BigDecimal id) {
         return mapper.selectByPrimaryKey(id);
     }
 

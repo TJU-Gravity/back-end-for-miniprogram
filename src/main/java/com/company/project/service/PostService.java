@@ -1,12 +1,8 @@
 package com.company.project.service;
 import com.company.project.model.Post;
 import com.company.project.core.Service;
-import com.company.project.model.Team;
-import com.company.project.web.model.MyRequestBody;
-import com.company.project.web.model.PostDetail;
-import com.company.project.web.model.PostResult;
-
-import java.math.BigDecimal;
+import com.company.project.service.model.MyRequestBody;
+import com.company.project.service.model.PostResult;
 import java.util.List;
 
 
@@ -16,8 +12,5 @@ import java.util.List;
 public interface PostService extends Service<Post> {
     List<PostResult> getList(MyRequestBody myRequestBody);
     List<PostResult> getMyList(MyRequestBody myRequestBody);
-    boolean addMember(BigDecimal teamID,int member);
-
-
 
 }

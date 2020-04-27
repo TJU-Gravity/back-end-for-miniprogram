@@ -2,14 +2,9 @@ package com.company.project.service.impl;
 
 import com.company.project.core.ServiceException;
 import com.company.project.dao.UserMapper;
-import com.company.project.dao.UserTagsMapper;
 import com.company.project.model.User;
-import com.company.project.model.UserTags;
 import com.company.project.service.UserService;
 import com.company.project.core.AbstractService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.company.project.service.model.AuthObject;
 import com.company.project.service.model.WxMappingJackson2HttpMessageConverter;
@@ -29,26 +24,19 @@ import javax.annotation.Resource;
 public class UserServiceImpl extends AbstractService<User> implements UserService {
     @Resource
     private UserMapper guserMapper;
-    @Resource
-    private UserTagsMapper userTagsMapper;
+
 
     public User findByUsername(String username)
     {
         User user= guserMapper.findByUsername(username);
         if(user!=null)
         {
-            List<UserTags> userTags=userTagsMapper.findAllTags(username);
-            List<String> tags=new ArrayList<>();
-            for(UserTags userTag:userTags)
-            {
-                tags.add(userTag.getTag());
-            }
-            user.setTags(tags);
-
+            //可能要做标签处理
         }
 
         return user;
     }
+
 
     @Override
     public void deleteByUsername (String username) {

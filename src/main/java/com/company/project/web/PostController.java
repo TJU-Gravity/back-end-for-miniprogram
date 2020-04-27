@@ -3,18 +3,13 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.core.ServiceException;
-import com.company.project.model.Reply;
-import com.company.project.model.Team;
-import com.company.project.model.UserTeam;
 import com.company.project.service.*;
 
-import com.company.project.service.impl.ReplyServiceImpl;
 
-
-import com.company.project.web.model.MyRequestBody;
+import com.company.project.service.model.MyRequestBody;
 import com.company.project.model.Post;
-import com.company.project.web.model.PostDetail;
-import com.company.project.web.model.PostResult;
+import com.company.project.service.model.PostDetail;
+import com.company.project.service.model.PostResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -22,9 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.io.ByteArrayInputStream;
-import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -43,11 +35,7 @@ public class PostController {
     private ReplyService replyService;
     @Resource
     private UserService uService;
-    @Resource
-    private TeamService teamService;
-    @Resource
-    private UserTeamService userTeamService;
-    //update
+
 
     @PostMapping("/add")
     public Result add(@RequestBody Post post) {
@@ -60,68 +48,14 @@ public class PostController {
         {
             throw new ServiceException("参数不符合要求");
         }
-        if(post.getPosttype().equals("1"))
-        {
-            try {
-                assert (post.team != null);
-                assert (post.team.getTeam_name().length()<=15);
-                assert (post.getState()!=null&&(post.getState().compareTo(BigDecimal.valueOf(0))>=1));
-            }
-            catch (Exception e)
-            {
-                throw new ServiceException("参数不符合要求");
-            }
-            logger.warn(post.team.getTeam_name());
-            post.team.setMember_Num(1);
-            post.team.setCreate_date(new Date());
-            teamService.add(post.team);
-
-            UserTeam userTeam=new UserTeam();
-            userTeam.setTeamid(post.team.getTeamid());
-            userTeam.setUsername(post.team.getCaptainid());
-            userTeamService.save(userTeam);
-
-
-            post.setPostingtime(new Timestamp(new Date().getTime()));
-            post.setLastpost(post.getPostingtime());
-            post.setTeamid(post.team.getTeamid());
-            postService.save(post);
-
-            postService.addMember(post.team.getTeamid(),1);
-            return ResultGenerator.genSuccessResult();
-        }
-        else
-        {
-            post.setPostingtime(new Timestamp(new Date().getTime()));
-            post.setLastpost(post.getPostingtime());
-            postService.save(post);
-            return ResultGenerator.genSuccessResult();
-        }
-
-
-    }
-
-    @PostMapping("/team/add")
-    public Result addWithTeam(@RequestBody Post post) {
-        logger.warn(post.team.getTeam_name());
-        post.team.setMember_Num(1);
-        post.team.setCreate_date(new Date());
-        teamService.add(post.team);
-
-        UserTeam userTeam=new UserTeam();
-        userTeam.setTeamid(post.team.getTeamid());
-        userTeam.setUsername(post.team.getCaptainid());
-        userTeamService.save(userTeam);
-
 
         post.setPostingtime(new Timestamp(new Date().getTime()));
         post.setLastpost(post.getPostingtime());
-        post.setTeamid(post.team.getTeamid());
         postService.save(post);
-
-        postService.addMember(post.team.getTeamid(),1);
         return ResultGenerator.genSuccessResult();
+
     }
+
 
     //new ID
     @PostMapping("/delete")
