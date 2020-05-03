@@ -10,7 +10,7 @@
     <result column="accepter" jdbcType="VARCHAR" property="accepter" />
     <result column="id" jdbcType="NUMERIC" property="id" />
     <result column="status" jdbcType="INTEGER" property="status" />
-
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
 
   <select id="getMyList" resultType="com.company.project.model.Apply">

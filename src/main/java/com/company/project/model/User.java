@@ -47,6 +47,9 @@ public class User {
     private String qq;
     private String privacy;
 
+    private String school;
+    private String major;
+    private String grade;
     @Transient
     private String code;
 
@@ -281,4 +284,53 @@ public class User {
     public void setWechat(String wechat) {
         this.wechat = wechat;
     }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public void setUnreadApply(Integer unreadApply) {
+        this.unreadApply = unreadApply;
+    }
+
+    public Integer getUnreadApply() {
+        return unreadApply;
+    }
+
 }

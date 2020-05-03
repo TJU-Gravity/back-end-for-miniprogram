@@ -53,7 +53,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     public void getOpenId(User u) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new WxMappingJackson2HttpMessageConverter());
-        ResponseEntity<AuthObject> responseEntity = restTemplate.getForEntity("https://api.weixin.qq.com/sns/jscode2session?appid="+"wxd1e48ab0818b69b3"+"&secret="+"8e92ab857c70a02011228414ba61d3b0"+"&js_code="+u.getCode()+"&grant_type=authorization_code", AuthObject.class);
+        ResponseEntity<AuthObject> responseEntity = restTemplate.getForEntity("https://api.weixin.qq.com/sns/jscode2session?appid="+"wxd1e48ab0818b69b3"+"&secret="+"f077c43e676923d47e258127e84357a9"+"&js_code="+u.getCode()+"&grant_type=authorization_code", AuthObject.class);
         if(responseEntity.getBody().errcode==0)
         {
             u.setUsername(responseEntity.getBody().openid);

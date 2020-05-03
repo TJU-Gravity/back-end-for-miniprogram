@@ -1,6 +1,9 @@
 package com.company.project.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 @Table(name = "apply")
@@ -17,6 +20,9 @@ public class Apply {
 
     @Column(name = "status")
     private Integer status;
+
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    private Timestamp time;
 
 
     public void setAccepter(String accepter) {
