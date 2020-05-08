@@ -56,7 +56,7 @@ public class UserController {
     public Result update( @RequestBody User user) {
 
         userService.update(user);
-        user=userService.findByUsername(user.getUsername());
+        user=userService.findById(user.getId());
 
         return ResultGenerator.genSuccessResult(user);
     }

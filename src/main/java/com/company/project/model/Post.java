@@ -36,8 +36,8 @@ public class Post {
     @Column(name = "postBody")
     private String postbody;
 
-
-
+    @Column(name = "tags")
+    private String tags;
 
 
 
@@ -168,5 +168,13 @@ public class Post {
 
     public void setPostbody(String postbody) {
         this.postbody = postbody;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

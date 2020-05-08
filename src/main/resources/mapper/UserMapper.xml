@@ -7,23 +7,15 @@
     -->
     <id column="username" jdbcType="VARCHAR" property="username" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+
     <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="headshot" jdbcType="VARCHAR" property="headshot" />
-    <result column="loc" jdbcType="VARCHAR" property="loc" />
 
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-    <result column="userPrivileges" jdbcType="INTEGER" property="userprivileges" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-
-    <result column="user_sig" jdbcType="VARCHAR" property="user_sig" />
-    <result column="expire_time" jdbcType="DATE" property="expire_time" />
-
 
     <result column="tags" jdbcType="VARCHAR" property="tags" />
-    <result column="unread_apply" jdbcType="INTEGER" property="unreadApply" />
 
-    <result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phonenumber" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="wechat" jdbcType="VARCHAR" property="wechat" />
     <result column="qq" jdbcType="VARCHAR" property="qq" />
@@ -45,7 +37,7 @@
     </select>
 
   <select id="addUser" parameterType="com.company.project.model.User" >
-    INSERT INTO guser ( username,nickname,pwd,gender,headshot,loc,phonenumber,introduction,email,tags ) values(#{username},#{nickname},#{pwd},#{gender},#{headshot},#{loc},#{phonenumber},#{introduction},#{email},#{tags})
+    INSERT INTO guser ( username,nickname,pwd,gender,headshot,loc,phone_number,introduction,email,tags ) values(#{username},#{nickname},#{pwd},#{gender},#{headshot},#{loc},#{phonenumber},#{introduction},#{email},#{tags})
   </select>
 
   <update id="updateUsersig" parameterType="com.company.project.model.User">

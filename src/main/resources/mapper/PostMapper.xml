@@ -5,24 +5,25 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="POSTID" jdbcType="NUMERIC" property="postid" />
-    <result column="POSTTYPE" jdbcType="VARCHAR" property="posttype" />
-    <result column="POSTERID" jdbcType="VARCHAR" property="posterid" />
+    <id column="POST_ID" jdbcType="NUMERIC" property="postid" />
+    <result column="POST_TYPE" jdbcType="VARCHAR" property="posttype" />
+    <result column="POSTER_ID" jdbcType="VARCHAR" property="posterid" />
 
-    <result column="POSTINGTIME" jdbcType="TIMESTAMP" property="postingtime" />
+    <result column="POSTING_TIME" jdbcType="TIMESTAMP" property="postingtime" />
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
     <result column="HITS" jdbcType="NUMERIC" property="hits" />
     <result column="STATE" jdbcType="NUMERIC" property="state" />
-    <result column="LASTPOST" jdbcType="TIMESTAMP" property="lastpost" />
-    <result column="POSTBODY" jdbcType="CLOB" property="postbody" />
+    <result column="LAST_POST" jdbcType="TIMESTAMP" property="lastpost" />
+    <result column="POST_BODY" jdbcType="CLOB" property="postbody" />
+    <result column="TAGS" jdbcType="VARCHAR" property="tags" />
 
   </resultMap>
   <select id="getList"  resultType="com.company.project.service.model.PostResult">
-    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,nickname,headshot,state from guser as u join post as p on (u.username=p.posterid) order by lastpost DESC
+    select post_id,post_type,poster_id,posting_time,title,hits,last_post,post_body,nickname,headshot,state,tags from guser as u join post as p on (u.username=p.posterid) order by lastpost DESC
   </select>
 
   <select id="getMyList" parameterType="String" resultType="com.company.project.service.model.PostResult">
-    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,state from post where posterid=#{username} order by lastpost DESC
+    select postid,posttype,posterid,postingtime,title,hits,lastpost,postbody,state,tags from post where posterid=#{username} order by lastpost DESC
   </select>
 
 

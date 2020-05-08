@@ -25,7 +25,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Resource
     private UserMapper guserMapper;
 
-
+    @Override
     public User findByUsername(String username)
     {
         User user= guserMapper.findByUsername(username);
@@ -43,6 +43,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         guserMapper.deleteByPrimaryKey(username);
     }
 
+    @Override
     public void addUser(User u)
     {
         guserMapper.addUser(u);
@@ -65,12 +66,13 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         }
     }
 
+    @Override
     public User findByOpenid(String openid)
     {
 
         return null;
 
     }
-
+    @Override
     public void updateUsersig(User u){ guserMapper.updateUsersig(u);}
 }

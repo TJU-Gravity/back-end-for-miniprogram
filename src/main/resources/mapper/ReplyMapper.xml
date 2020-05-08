@@ -5,18 +5,18 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="REPLYID" jdbcType="NUMERIC" property="replyid" />
-    <result column="POSTID" jdbcType="NUMERIC" property="postid" />
-    <result column="POSTERID" jdbcType="VARCHAR" property="posterid" />
-    <result column="POSTINGTIME" jdbcType="TIMESTAMP" property="postingtime" />
-    <result column="REPLYBODY" jdbcType="CLOB" property="replybody" />
+    <id column="REPLY_ID" jdbcType="NUMERIC" property="replyid" />
+    <result column="POST_ID" jdbcType="NUMERIC" property="postid" />
+    <result column="POSTER_ID" jdbcType="VARCHAR" property="posterid" />
+    <result column="POSTING_TIME" jdbcType="TIMESTAMP" property="postingtime" />
+    <result column="REPLY_BODY" jdbcType="CLOB" property="replybody" />
     <result column="quote" jdbcType="NUMERIC" property="quote" />
   </resultMap>
 
   <select id="getReplys" parameterType="Integer" resultType="com.company.project.service.model.ReplyResult">
-    select replyid,postid,posterid,postingtime,replybody,nickname,headshot,quote from  reply  as r join  guser as u on (r.posterid=u.username) where postID=#{postid};
+    select reply_id,post_id,poster_id,posting_time,reply_body,nickname,headshot,quote from  reply  as r join  guser as u on (r.posterid=u.username) where postID=#{postid};
   </select>
   <select id="getReply" parameterType="Integer" resultType="com.company.project.service.model.ReplyResult">
-    select replyid,postid,posterid,postingtime,replybody,nickname,headshot,quote from  reply  as r join  guser as u on (r.posterid=u.username) where replyID=#{replyid};
+    select reply_id,post_id,poster_id,posting_time,reply_body,nickname,headshot,quote from  reply  as r join  guser as u on (r.posterid=u.username) where replyID=#{replyid};
   </select>
 </mapper>

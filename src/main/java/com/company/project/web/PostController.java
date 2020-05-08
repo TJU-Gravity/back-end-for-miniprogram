@@ -74,10 +74,15 @@ public class PostController {
     public Result detail(@RequestBody MyRequestBody body) {
         PostDetail postDetail=new PostDetail();
         postDetail.post=postService.findById(body.ID);
-        postDetail.replies=replyService.getReplys(body.ID);
-        postDetail.user=uService.findByUsername(postDetail.post.getPosterid());
-
-        return ResultGenerator.genSuccessResult(postDetail);
+        if(postDetail.post !=null) {
+            postDetail.replies = replyService.getReplys(body.ID);
+            logger.warn(postDetail.post.getPosterid());
+            postDetail.user=uService.findByUsername(postDetail.post.getPosterid());
+            return ResultGenerator.genSuccessResult(postDetail);
+        }
+        else{
+            return ResultGenerator.genFailResult("帖子不存在");
+        }
     }
 
 //new
